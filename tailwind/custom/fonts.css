@@ -1,0 +1,25 @@
+/**
+ * Custom `@font-face` rules
+ *
+ * These will be added immediately before Tailwind’s `base` layer.
+ */
+
+  @font-face {
+    font-family: 'BentonSans';
+    src: local('BentonSans Medium'), local('BentonSans-Medium'),
+        url('./fonts/BentonSans-Medium.woff2') format('woff2'),
+        url('./fonts/BentonSans-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BentonSans';
+    src: local('BentonSans Regular'), local('BentonSans-Regular'),
+        url('./fonts/BentonSans-Regular.woff2') format('woff2'),
+        url('./fonts/BentonSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

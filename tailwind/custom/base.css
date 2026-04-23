@@ -1,0 +1,48 @@
+/**
+ * Custom styles to immediately follow Tailwind’s `base` layer
+ */
+
+/**
+ * This uses the background and foreground colors declared in the `theme.json`
+ * file and is applied both to the front end and in the block editor.
+ */
+body {
+	@apply bg-background text-foreground font-sans;
+}
+.home{
+    @apply bg-[url('/assets/bg-hero.svg')]  bg-no-repeat bg-top-right;
+    background-size: 90%;
+}
+
+.custom-logo{
+    @apply max-w-[229px] w-full h-auto ;
+}
+
+    .container {
+        @apply max-w-[1280px] mx-auto px-4;
+    }
+    .container-full{
+        @apply max-w-[calc(100%-84px)] mx-auto px-6 lg:px-10;
+    }
+    .container-grid{
+        @apply max-w-[calc(100%-84px)] mx-auto;
+    }
+    .section-title{
+        @apply text-4xl md:text-7xl  lg:text-[153px] font-medium;
+    }
+    .my-paragraph{
+        @apply text-justify tracking-[10%];
+    }
+
+    .form-section-title{
+        @apply text-2xl font-medium;
+    }
+    .input-label{
+        @apply text-xl font-medium;
+    }
+      .input {
+    @apply w-full px-4 py-3 border border-secondary rounded-full focus:outline-none focus:ring-2 focus:ring-accent;
+  }
+    .chevron {
+    @apply absolute right-2 inset-y-0 flex items-center pointer-events-none;
+  }
