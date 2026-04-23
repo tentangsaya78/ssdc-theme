@@ -1,6 +1,10 @@
 <?php 
  $video = get_field('video');
  $video_thumbnail = get_field('video_thumbnail');
+
+ $email = get_field('email', 'option');
+ $instagram = get_field('instagram', 'option');
+ $logo_footer = get_field('logo_footer', 'option');
 ?>
 <section class="w-full pb-40">
     <div class="relative font-inter antialiased">
@@ -114,18 +118,18 @@
     <div class="container-full mt-9 flex flex-col gap-3">
         <p class="text-3xl">Check Us Out</p>
         <a
-            href="#"
+            href="<?php echo $instagram['url']; ?>"
             class="flex items-center gap-2 text-xl hover:text-accent duration-200"
         >
             <i class="bi bi-instagram text-3xl"></i>
-            @ssdc2026
+            <?php echo $instagram['title']; ?>
         </a>
         <a
-            href="#"
+            href="mailto:<?php echo $email; ?>"
             class="flex items-center gap-2 text-xl hover:text-accent duration-200"
         >
             <i class="bi bi-envelope text-3xl"></i>
-            apacssdc@gmail.com
+            <?php echo $email; ?>
         </a>
     </div>
 </section>

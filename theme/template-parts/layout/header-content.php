@@ -7,41 +7,44 @@
  * @package ssdc
  */
 
+ $menu = [
+	"Home"=>"/#home",
+	"About"=>"/#about",
+	"Judges"=>"/#judges",
+	"Guideline & Rules"=>"/#rule",
+	"FAQ"=>"/#faq",
+	"Registration & Submission"=>"/register",
+	"SketchUp Ecosystems"=>"/#ss",
+ ]
 ?>
 
 <header id="masthead">
 
-	<div>
-		<?php
-		if ( is_front_page() ) :
-			?>
-			<h1><?php bloginfo( 'name' ); ?></h1>
-			<?php
-		else :
-			?>
-			<p><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-		endif;
+<div x-data="{ menuOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 100">
+    <div class="menu fixed z-5 top-5 left-6 transition-all duration-300"
+        :class="[
+            menuOpen ? 'rounded-2xl p-2 bg-white border border-secondary/20 ' : '',
+            !menuOpen && scrolled ? 'rounded-2xl p-2 bg-white shadow-md' : ''
+        ]" x-transition >
+        <div class="flex items-start gap-2">
+            <button @click="menuOpen = !menuOpen" class="menu flex items-center gap-2 text-2xl ">
+                <i class="text-4xl leading-0" :class="menuOpen ? 'bi bi-x' : 'bi bi-list'"></i>
+                <span :class="menuOpen ? 'hidden' : ''" class="text-2xl">MENU</span>
+            </button>
 
-		$ssdc_description = get_bloginfo( 'description', 'display' );
-		if ( $ssdc_description || is_customize_preview() ) :
-			?>
-			<p><?php echo $ssdc_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-		<?php endif; ?>
-	</div>
-
-	<nav id="site-navigation" aria-label="<?php esc_attr_e( 'Main Navigation', 'ssdc' ); ?>">
-		<button aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'ssdc' ); ?></button>
-
-		<?php
-		wp_nav_menu(
-			array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-				'items_wrap'     => '<ul id="%1$s" class="%2$s" aria-label="submenu">%3$s</ul>',
-			)
-		);
-		?>
-	</nav><!-- #site-navigation -->
+            <div x-show="menuOpen" x-transition>
+                <ul class="flex flex-col gap-4">
+					<?php foreach ($menu as $key => $value): ?>
+						<li @click="menuOpen = false">
+							<a href="<?php echo $value; ?>" class="text-2xl hover:text-accent duration-200">
+								<?php echo $key; ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 </header><!-- #masthead -->

@@ -6,8 +6,14 @@
  * This uses the background and foreground colors declared in the `theme.json`
  * file and is applied both to the front end and in the block editor.
  */
+
+ html,body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
 body {
     @apply bg-background text-foreground font-sans;
+   
 }
 
 .home {
@@ -64,10 +70,19 @@ body {
 }
 
 /* rule section */
-#rule ul{
-    @apply list-disc list-inside flex flex-col gap-3;
+#rule{
+    @apply text-justify tracking-[10%];
 }
 
-#rule ul ul{
-    @apply pl-3;
+#rule ul{
+    @apply list-disc  flex flex-col gap-4 pl-4 lg:pl-6;
+}
+
+#rule table
+{
+    @apply table-auto overflow-x-auto;
+}
+
+#rule table td{
+    @apply p-2;
 }
