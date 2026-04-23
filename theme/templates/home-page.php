@@ -10,6 +10,7 @@ get_template_part( 'template-parts/home/about');
 get_template_part( 'template-parts/home/video');
 get_template_part( 'template-parts/home/judges');
 get_template_part( 'template-parts/home/rule');
+get_template_part( 'template-parts/home/cta');
 get_template_part( 'template-parts/home/sketchup');
 
 ?>
