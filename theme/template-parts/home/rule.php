@@ -64,18 +64,8 @@ $rules = new WP_Query($args);
             </div>
 
             <!-- Sidebar Navigasi -->
-            <div class="md:col-span-2 p-6 sticky top-6">
-                <nav class="flex flex-col gap-3 text-sm mb-6">
-                    <?php foreach ($nav_items as $index => $item) : ?>
-                        
-                            href="#<?php echo esc_attr($item['slug']); ?>"
-                            class="hover:text-primary transition-colors"
-                        >
-                            <?php echo ($index + 1) . '. ' . esc_html($item['title']); ?>
-                        </a>
-                    <?php endforeach; ?>
-                </nav>
-                <a href="#" class="text-sm">Back to Top <i class="bi bi-arrow-up"></i></a>
+            <div class="md:col-span-2 p-6 sticky top-6 flex justify-center items-center">
+                <a href="#rule" class="text-xl">Back to Top <i class="bi bi-arrow-up"></i></a>
             </div>
 
         </div>

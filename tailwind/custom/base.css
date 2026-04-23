@@ -62,3 +62,12 @@ body {
 .chevron, .ssdc-chevron {
     @apply absolute right-2 inset-y-0 flex items-center pointer-events-none;
 }
+
+/* rule section */
+#rule ul{
+    @apply list-disc list-inside flex flex-col gap-3;
+}
+
+#rule ul ul{
+    @apply pl-3;
+}
