@@ -99,7 +99,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 >
 
     <!-- ── Topbar ── -->
-    <div class="bg-primary text-white px-6 py-4 flex items-center justify-between shadow">
+    <div class="bg-white  px-6 py-4 flex items-center justify-between shadow">
         <div class="flex items-center gap-3">
             <?php if (has_custom_logo()) the_custom_logo(); ?>
             <div>

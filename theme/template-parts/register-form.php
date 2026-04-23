@@ -1,7 +1,7 @@
 <?php
 // Redirect jika sudah login
 if (is_user_logged_in()) {
-    wp_redirect(home_url('/dashboard'));
+    wp_redirect(home_url('/editor-dashboard'));
     exit;
 }
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>
                 </div>
-                <h2 class="text-2xl font-semibold mb-2">Registrasi Berhasil!</h2>
+                <h2 class="text-2xl font-medium mb-2">Registrasi Berhasil!</h2>
                 <p class="text-gray-500 mb-6">Silakan cek email Anda untuk detail akun dan langkah selanjutnya.</p>
                 <a href="<?php echo wp_login_url(); ?>" class="inline-block bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition">
                     Login Sekarang
@@ -85,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
 
         <?php else : ?>
             <!-- Form -->
-            <div class="bg-white shadow-xl p-8">
-                <h2 class="text-2xl font-semibold mb-6">Buat Akun</h2>
+            <div class="bg-white shadow-xl p-8 rounded-lg">
+                <h2 class="text-xl font-medium mb-6">Buat Akun</h2>
 
                 <?php if (!empty($errors)) : ?>
                     <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 mb-6 text-sm">
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                             type="text"
                             name="fullname"
                             value="<?php echo esc_attr($_POST['fullname'] ?? ''); ?>"
-                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm"
+                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
                             placeholder="John Doe"
                             required
                         />
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                             type="text"
                             name="username"
                             value="<?php echo esc_attr($_POST['username'] ?? ''); ?>"
-                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm"
+                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
                             placeholder="johndoe"
                             required
                         />
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                             type="email"
                             name="email"
                             value="<?php echo esc_attr($_POST['email'] ?? ''); ?>"
-                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm"
+                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
                             placeholder="john@example.com"
                             required
                         />
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         <input
                             type="password"
                             name="password"
-                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm"
+                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
                             placeholder="Minimal 8 karakter"
                             required
                         />
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         <input
                             type="password"
                             name="password2"
-                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm"
+                            class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
                             placeholder="Ulangi password"
                             required
                         />
@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
 
                     <button
                         type="submit"
-                        class="w-full bg-primary text-white py-3 font-medium hover:bg-primary/90 transition text-sm tracking-wide"
+                        class="w-full bg-primary text-white py-3 font-medium hover:bg-primary/90 transition text-sm tracking-wide rounded-full"
                     >
                         Daftar Sekarang
                     </button>
