@@ -46,9 +46,13 @@ $rules = new WP_Query($args);
                     $content = apply_filters('the_content', get_the_content());
                     $subtitle = get_field('subtitle'); // opsional ACF
                 ?>
-                    <div id="<?php echo esc_attr($slug); ?>" class="rule-item flex gap-5 mb-20">
+                    <div id="<?php echo esc_attr($slug); ?>" class="rule-item flex flex-wrap gap-5 mb-20">
                         <div class="shrink-0">
-                            <h2 class="text-4xl lg:text-7xl font-bold"><?php echo $counter; ?></h2>
+                           <!--  <h2 class="text-4xl lg:text-7xl font-bold"><?php // echo $counter; ?></h2> -->
+                             <?php if (has_post_thumbnail()) : ?>
+                                <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($title)); ?>" />
+                            <?php endif; ?>
+
                         </div>
                         <div class="my-paragraph text-xl flex flex-col gap-5">
                             <h3 class="text-3xl lg:text-5xl mb-5 font-medium">

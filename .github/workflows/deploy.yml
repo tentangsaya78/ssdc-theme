@@ -96,7 +96,7 @@ jobs:
       # ─────────────────────────────────────────
       - name: Deployment success
         if: success()
-        run: echo "✅ Deploy berhasil ke /wp-content/themes/idk/"
+        run: echo "✅ Deploy berhasil ke /wp-content/themes/ssdc/"
 
       - name: Deployment failed
         if: failure()

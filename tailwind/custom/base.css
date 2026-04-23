@@ -71,11 +71,11 @@ body {
 
 /* rule section */
 #rule{
-    @apply text-justify tracking-[10%];
+    @apply lg:text-justify tracking-[10%] text-sm lg:text-lg;
 }
 
 #rule ul{
-    @apply list-disc  flex flex-col gap-4 pl-4 lg:pl-6;
+    @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6 ;
 }
 
 #rule table

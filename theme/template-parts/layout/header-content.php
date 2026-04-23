@@ -47,8 +47,8 @@
     </div>
 </div>
 
-<div class="fixed z-5 top-2 lg:top-5 right-2 lg:right-6 rounded-full p-3 bg-white border border-secondary/20 flex gap-2 items-center">
- <i class="bi bi-translate text-primary"></i> <span>Language</span>  <span class="p-2 rounded-full bg-primary text-white text-sm"> <?php echo do_shortcode('[gtranslate]'); ?></span>  
+<div class="fixed z-5 top-2 lg:top-5 right-2 lg:right-6 rounded-full pl-3 bg-white border border-secondary/20 flex gap-2 items-center">
+ <i class="bi bi-translate text-primary"></i> <span class="hidden md:block">Language</span>  <span class="p-2 rounded-full bg-primary text-white text-sm"> <?php echo do_shortcode('[gtranslate]'); ?></span>  
 </div>
 
 </header><!-- #masthead -->
