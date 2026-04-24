@@ -91,3 +91,6 @@ table{
     @apply p-2;
 }
 
+#overview-of-design-competition-inherited-futures h4{
+    @apply text-3xl lg:text-4xl font-medium;
+} 
