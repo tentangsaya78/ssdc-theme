@@ -1,103 +1,45 @@
-name: Deploy Theme via FTP
+name: Deploy Theme (Simple FTP)
 
-# Workflow deployment via FTP ke shared hosting (WordPress)
-# Target: /wp-content/themes/idk/
+# Workflow sederhana untuk deployment via FTP
+# Cocok untuk shared hosting yang hanya support FTP
 
 on:
   push:
     branches:
       - main
       - master
-  # Bisa juga trigger manual dari GitHub Actions tab
-  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
+    
     steps:
-      # ─────────────────────────────────────────
-      # 1. Checkout kode
-      # ─────────────────────────────────────────
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ─────────────────────────────────────────
-      # 2. Setup Node.js dengan cache
-      # ─────────────────────────────────────────
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      # ─────────────────────────────────────────
-      # 3. Install dependencies
-      # ─────────────────────────────────────────
       - name: Install dependencies
         run: npm ci
 
-      # ─────────────────────────────────────────
-      # 4. Build untuk production
-      # ─────────────────────────────────────────
       - name: Build for production
         run: npm run production
 
-      # ─────────────────────────────────────────
-      # 5. Verifikasi folder hasil build ada
-      #    Ganti './theme/' jika output folder berbeda
-      # ─────────────────────────────────────────
-      - name: Verify build output exists
-        run: |
-          if [ ! -d "./theme" ]; then
-            echo "❌ ERROR: Folder './theme' tidak ditemukan!"
-            echo "Isi direktori saat ini:"
-            ls -la
-            exit 1
-          fi
-          echo "✅ Folder './theme' ditemukan"
-          echo "Isi folder theme:"
-          ls -la ./theme/
-
-      # ─────────────────────────────────────────
-      # 6. Deploy via FTP
-      #
-      # Secrets yang harus diset di GitHub:
-      #   FTP_SERVER      → contoh: ftp.namadomain.com
-      #   FTP_USERNAME    → contoh: user@namadomain.com
-      #   FTP_PASSWORD    → password FTP kamu
-      #
-      # server-dir sudah di-hardcode ke path WordPress theme
-      # Trailing slash WAJIB ada di server-dir
-      # ─────────────────────────────────────────
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /wp-content/themes/ssdc/
+          server-dir: ${{ secrets.FTP_REMOTE_PATH }}
           local-dir: ./theme/
-          protocol: ftp        # Ganti ke 'ftps' jika hosting support FTPS
-          port: 21
-          dangerous-clean-slate: false   # true = hapus semua file di server dulu (HATI-HATI)
+          dangerous-clean-slate: false
           dry-run: false
-          log-level: verbose   # Tampilkan log detail untuk debugging
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.env
-            **/.env.*
 
-      # ─────────────────────────────────────────
-      # 7. Notifikasi hasil deployment
-      # ─────────────────────────────────────────
-      - name: Deployment success
-        if: success()
-        run: echo "✅ Deploy berhasil ke /wp-content/themes/ssdc/"
 
-      - name: Deployment failed
-        if: failure()
-        run: echo "❌ Deploy gagal. Cek log di atas untuk detail error."
+
+
