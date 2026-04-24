@@ -54,7 +54,7 @@ $rules = new WP_Query($args);
                             <?php endif; ?>
 
                         </div>
-                        <div class="my-paragraph text-xl flex flex-col gap-5">
+                        <div class="my-paragraph text-xl flex flex-col gap-5 w-full wrap-break-word">
                             <h3 class="text-3xl lg:text-5xl mb-5 font-medium">
                                 <?php echo wp_kses_post($title); ?>
                                 <?php if ($subtitle) : ?>
