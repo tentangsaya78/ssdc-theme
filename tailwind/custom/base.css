@@ -16,6 +16,10 @@ body {
    
 }
 
+table{
+    @apply overflow-x-auto;
+}
+
 .home {
     @apply bg-[url('/assets/bg-hero.svg')] bg-no-repeat bg-top-right;
     background-size: 90%;
@@ -42,7 +46,7 @@ body {
 }
 
 .my-paragraph {
-    @apply text-justify tracking-[10%];
+    @apply lg:text-justify lg:tracking-[10%];
 }
 
 .form-section-title {
@@ -86,3 +90,4 @@ body {
 #rule table td{
     @apply p-2;
 }
+

@@ -6,7 +6,7 @@
  $instagram = get_field('instagram', 'option');
  $logo_footer = get_field('logo_footer', 'option');
 ?>
-<section class="w-full pb-40">
+<section class="w-full pb-12 lg:pb-40">
     <div class="relative font-inter antialiased">
         <div
             class="relative flex flex-col justify-center bg-primary py-10 overflow-hidden"
@@ -117,6 +117,7 @@
     </div>
     <div class="container-full mt-9 flex flex-col gap-3">
         <p class="text-3xl">Check Us Out</p>
+        <div class="flex lg:flex-col lg:justify-start justify-center items-center"></div>
         <a
             href="<?php echo $instagram['url']; ?>"
             class="flex items-center gap-2 text-xl hover:text-accent duration-200"
