@@ -92,11 +92,11 @@ $important_dates = [
                 <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                     <i class="bi bi-clipboard-x text-3xl text-secondary/40"></i>
                 </div>
-                <h2 class="text-xl font-semibold text-primary mb-2">Belum Ada Pendaftaran</h2>
-                <p class="text-secondary text-sm mb-6">Kamu belum mengisi form pendaftaran tim.<br>Segera daftarkan timmu sebelum deadline!</p>
+                <h2 class="text-xl font-semibold text-primary mb-2">No registration yet</h2>
+                <p class="text-secondary text-sm mb-6">You haven't filled out the team registration form yet.<br>Register your team immediately before the deadline!</p>
                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                     class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-primary/80 transition">
-                    <i class="bi bi-pencil-square"></i> Isi Form Pendaftaran
+                    <i class="bi bi-pencil-square"></i> Fill in the Registration Form
                 </a>
             </div>
 
@@ -288,7 +288,7 @@ $important_dates = [
 
                             <?php if (!$has_sub) : ?>
                                 <div class="text-center py-4">
-                                    <p class="text-sm text-secondary/50 mb-3">Belum ada submission yang diunggah.</p>
+                                    <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
                                     <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                                         class="inline-flex items-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
                                         <i class="bi bi-upload"></i> Upload Submission
@@ -350,7 +350,7 @@ $important_dates = [
                             <?php if ($status === 'draft') : ?>
                                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                                     class="w-full flex items-center justify-center gap-2 bg-primary text-white py-2.5 rounded-full text-sm font-medium hover:bg-primary/80 transition">
-                                    <i class="bi bi-pencil"></i> Perbarui Data
+                                    <i class="bi bi-pencil"></i> Update Data
                                 </a>
                             <?php endif; ?>
                         </div>
