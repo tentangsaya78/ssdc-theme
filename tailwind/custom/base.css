@@ -46,9 +46,12 @@ table{
 }
 
 .my-paragraph {
-    @apply lg:text-justify lg:tracking-[10%];
+    @apply lg:text-justify lg:tracking-[10%] ;
 }
 
+.my-paragraph p{
+    @apply mb-6;
+}
 .form-section-title {
     @apply text-2xl font-medium;
 }
