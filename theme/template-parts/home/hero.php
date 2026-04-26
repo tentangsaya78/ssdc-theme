@@ -8,6 +8,7 @@ $logo_hero = get_field( 'logo_hero' );
 $title = get_field( 'hero_title' );
 $sub_title = get_field( 'hero_sub_title' );
 $date = get_field( 'date' );
+$hero_location = get_field( 'hero_location' );
 $organizer  = get_field( 'organizer' );
 
 $button = get_field( 'hero_button' );
@@ -18,7 +19,7 @@ $button = get_field( 'hero_button' );
     <div class="px-6 lg:px-10 mb-8">
         <div class="max-w-[870px]">
             <?php if($logo_hero): ?>
-            <img src="<?php echo $logo_hero['url']; ?>" class="max-w-[229px] mb-6 lg:mb-14" alt="" />
+            <img src="<?php echo $logo_hero['url']; ?>" class="max-w-[229px] mb-6 lg:mb-10" alt="" />
             <?php endif; ?>
             <?php 
             if ( $title ) {
@@ -27,13 +28,18 @@ $button = get_field( 'hero_button' );
             }
             ?>
             <?php if($sub_title): ?>
-            <p class="text-2xl lg:text-4xl font-medium mb-6 lg:mb-14 uppercase pt-4 lg:pt-10">
+            <p class="text-3xl md:text-4xl lg:text-5xl text-primary  font-medium mb-6 lg:mb-6 uppercase pt-4 lg:pt-10">
                <?php echo $sub_title; ?>
             </p>
             <?php endif; ?>
             <?php if($date): ?>
             <p class="text-2xl font-medium">
                <?php echo $date; ?>
+            </p>
+            <?php endif; ?>
+            <?php if($hero_location): ?>
+            <p class="text-xl ">
+               <?php echo $hero_location; ?>
             </p>
             <?php endif; ?>
         </div>

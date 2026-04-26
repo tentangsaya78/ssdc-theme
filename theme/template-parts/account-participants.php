@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_participant_nonc
     } elseif ($is_locked) {
         $errors[] = 'Data cannot be changed because it has already been approved.';
     } elseif ($is_submission_closed && !empty($_POST['has_submission'])) {
-        $errors[] = 'Submission of files/links is not yet open. Please wait until May 12, 2026.';
+        $errors[] = 'Submission of files/links is not yet open. Please wait until May 21, 2026.';
     } else {
         $keys = [
             'region',
@@ -562,11 +562,11 @@ $steps = ['Institution', 'Head of Team', 'Members', 'Lecturer', 'Submission'];
                         <div class="bg-accent/5 border border-accent/10 rounded-xl p-4 mb-5 text-xs text-secondary leading-relaxed">
                             <p class="font-medium text-primary mb-1"><i class="bi bi-info-circle mr-1"></i> Submission Guidelines</p>
                             <ul class="space-y-1 list-disc list-inside">
-                                <li>Accepted formats: PDF, ZIP, or RAR (max 50MB)</li>
+                                <li>Accepted formats: PDF, ZIP, or RAR (max 5MB)</li>
                                 <li>Or provide a Google Drive / OneDrive link with public access</li>
                                 <li>File name must follow the format: <strong>TeamName_SSDC2026</strong></li>
-                                <li>Submission deadline: <strong>May 15, 2026</strong></li>
-                                <li>Submissions open from: <strong>May 12, 2026</strong></li>
+                                <li>Submission deadline: <strong>July 19, 2026</strong></li>
+                                <li>Submissions open from: <strong>May 21, 2026</strong></li>
                             </ul>
                         </div>
 
@@ -574,8 +574,8 @@ $steps = ['Institution', 'Head of Team', 'Members', 'Lecturer', 'Submission'];
                             <!-- ── SUBMISSION LOCKED ── -->
                             <div class="rounded-2xl border-2 border-dashed border-amber-200 bg-amber-50 p-6 text-center">
                                 <i class="bi bi-clock-history text-3xl text-amber-400 block mb-2"></i>
-                                <p class="text-sm font-semibold text-amber-700 mb-1">Submission Opens May 12, 2026</p>
-                                <p class="text-xs text-amber-600 mb-3">You can complete all other steps now. File upload and link submission will be available starting May 12.</p>
+                                <p class="text-sm font-semibold text-amber-700 mb-1">Submission Opens May 21, 2026</p>
+                                <p class="text-xs text-amber-600 mb-3">You can complete all other steps now. File upload and link submission will be available starting May 21.</p>
                                 <p class="text-xs font-bold text-amber-700" id="countdown-timer">Calculating...</p>
                             </div>
                         <?php else : ?>
@@ -614,7 +614,7 @@ $steps = ['Institution', 'Head of Team', 'Members', 'Lecturer', 'Submission'];
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                     </svg>
                                     <p class="text-sm font-medium">Drag & drop or click to upload</p>
-                                    <p class="text-xs text-secondary/40 mt-1">PDF, ZIP, RAR (max 50MB)</p>
+                                    <p class="text-xs text-secondary/40 mt-1">PDF, ZIP, RAR (max 5MB)</p>
                                 </div>
 
                                 <div x-show="fileName" class="flex items-center gap-3 px-6 w-full">

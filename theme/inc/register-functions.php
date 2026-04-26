@@ -8,7 +8,7 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
     $admin_email = get_option('admin_email');
 
     // ── Email ke User ──────────────────────────────────────────
-    $user_subject = "🎉 Selamat datang di {$site_name} – Registrasi Berhasil!";
+    $user_subject = "🎉 Welcome to {$site_name} – Registration Successful!";
 
     $user_message = "
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
 <body>
     <div class='wrapper'>
         <div class='header'>
-            <h1>Notifikasi Admin – Peserta Baru</h1>
+            <h1>Admin Notification – New Participants</h1>
         </div>
         <div class='body'>
             <p>New participants have registered at <strong>{$site_name}</strong>:</p>

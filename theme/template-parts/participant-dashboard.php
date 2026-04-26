@@ -293,13 +293,9 @@ $important_dates = [
                                 <p class="text-xs text-secondary mb-5 leading-relaxed">
                                     Submission will open on <strong class="text-primary">21 May 2026</strong>.<br>
                                     Please prepare your files before the deadline.
-                                </p>
-
-                               
+                                </p>                              
 
                             </div>
-
-                          
 
                         <?php else : ?>
 
