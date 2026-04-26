@@ -39,9 +39,9 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
         </div>
         <div class='body'>
             <h2>Halo, {$fullname}! 👋</h2>
-            <p>Selamat! Kamu telah berhasil mendaftar sebagai peserta <strong>SketchUp Students Design Competition 2026</strong>. Kami sangat senang kamu bergabung.</p>
+            <p>Happy! You have successfully registered as a participant in the <strong>SketchUp Students Design Competition 2026</strong>. We are very happy to have you join.</p>
 
-            <p>Berikut adalah detail akun kamu:</p>
+            <p>Below are your account details:</p>
 
             <div class='info-box'>
                 <p><strong>Username:</strong> {$username}</p>
@@ -50,14 +50,14 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
                 <p><strong>Role:</strong> Participant (Contributor)</p>
             </div>
 
-            <p>Segera login untuk melengkapi profil dan mendapatkan informasi terbaru seputar kompetisi.</p>
+            <p>Log in immediately to complete your profile and get the latest information about the competition.</p>
 
-            <a href='{$login_url}' class='btn'>Login ke Akun Saya →</a>
+            <a href='{$login_url}' class='btn'>Login to My Account →</a>
 
-            <p style='font-size:12px; color:#999;'>Demi keamanan, kami sarankan untuk segera mengganti password Anda setelah login pertama.</p>
+            <p style='font-size:12px; color:#999;'>For security reasons, we recommend changing your password immediately after the first login.</p>
         </div>
         <div class='footer'>
-            &copy; " . date('Y') . " {$site_name} &nbsp;|&nbsp; Jangan balas email ini secara langsung.
+            &copy; " . date('Y') . " {$site_name} &nbsp;|&nbsp; Do not reply to this email directly.
         </div>
     </div>
 </body>
@@ -65,7 +65,7 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
 ";
 
     // ── Email ke Admin ──────────────────────────────────────────
-    $admin_subject = "[{$site_name}] Peserta baru mendaftar: {$fullname}";
+    $admin_subject = "[{$site_name}] New participants register: {$fullname}";
 
     $admin_message = "
 <!DOCTYPE html>
@@ -91,14 +91,14 @@ function ssdc_send_welcome_email($user_id, $email, $fullname, $username, $passwo
             <h1>Notifikasi Admin – Peserta Baru</h1>
         </div>
         <div class='body'>
-            <p>Peserta baru telah mendaftar di <strong>{$site_name}</strong>:</p>
+            <p>New participants have registered at <strong>{$site_name}</strong>:</p>
             <div class='info-box'>
-                <p><strong>Nama:</strong> {$fullname}</p>
+                <p><strong>Name:</strong> {$fullname}</p>
                 <p><strong>Username:</strong> {$username}</p>
                 <p><strong>Email:</strong> {$email}</p>
-                <p><strong>Tanggal Daftar:</strong> " . current_time('d M Y, H:i') . " WIB</p>
+                <p><strong>Registration Date:</strong> " . current_time('d M Y, H:i') . " WIB</p>
             </div>
-            <a href='" . admin_url('users.php') . "' class='btn'>Lihat di Dashboard →</a>
+            <a href='" . admin_url('users.php') . "' class='btn'>View on Dashboard →</a>
         </div>
         <div class='footer'>
             &copy; " . date('Y') . " {$site_name}

@@ -39,11 +39,13 @@ if ($has_data) {
 
 // Important dates (bisa dari ACF options page)
 $important_dates = [
-    ['date' => '01 May 2026',  'label' => 'Registration Deadline',    'done' => true],
-    ['date' => '15 May 2026',  'label' => 'Submission Deadline',      'done' => false],
-    ['date' => '01 Jun 2026',  'label' => 'Announcement of Finalists', 'done' => false],
-    ['date' => '15 Jun 2026',  'label' => 'Final Judging',            'done' => false],
-    ['date' => '30 Jun 2026',  'label' => 'Winners Announced',        'done' => false],
+    ['date' => '27 April 2026',  'label' => 'Completion Announcement',    'done' => true],
+    ['date' => '27 April- 27 May 2026',  'label' => 'Team Registration',      'done' => false],
+    ['date' => '7 May 2026',  'label' => 'Online Briefing (SketchUp Ecosystem + Judges Q&A)', 'done' => false],
+    ['date' => '19 July 2026',  'label' => 'Submission Deadline ','done' => false],
+    ['date' => '17 August 2026',  'label' => 'Announcement of 8 Shortlist', 'done' => false],
+    ['date' => '17 September 2026',  'label' => 'Final Presentation', 'done' => false],
+    ['date' => '17 September 2026',  'label' => 'Winner Announcement', 'done' => false],
 ];
 ?>
 
@@ -253,7 +255,7 @@ $important_dates = [
                     <!-- Submission Card -->
                   <!-- Submission Card -->
                     <?php
-                    $submission_open_date = new DateTime('2026-05-21 00:00:00', new DateTimeZone('Asia/Jakarta')); // 12 May 2026 - 00:00:00', new DateTimeZone('Asia/Jakarta'));
+                    $submission_open_date = new DateTime('2026-05-21 00:00:00', new DateTimeZone('Asia/Jakarta')); // 21 May 2026 - 00:00:00', new DateTimeZone('Asia/Jakarta'));
                     $now                  = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
                     $submission_locked    = $now < $submission_open_date;
 
@@ -289,7 +291,7 @@ $important_dates = [
 
                                 <p class="text-sm font-semibold text-primary mb-1">Submission Not Yet Open</p>
                                 <p class="text-xs text-secondary mb-5 leading-relaxed">
-                                    Submission will open on <strong class="text-primary">12 May 2026</strong>.<br>
+                                    Submission will open on <strong class="text-primary">21 May 2026</strong>.<br>
                                     Please prepare your files before the deadline.
                                 </p>
 
