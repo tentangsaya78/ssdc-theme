@@ -1,5 +1,5 @@
 <?php
-// Redirect jika sudah login
+// Redirect if already logged in
 if (is_user_logged_in()) {
     wp_redirect(home_url('/editor-dashboard'));
     exit;
@@ -17,18 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
         $password  = $_POST['password'] ?? '';
         $password2 = $_POST['password2'] ?? '';
         $fullname  = sanitize_text_field($_POST['fullname'] ?? '');
- 
 
-        // Validasi
-        if (empty($username))   $errors[] = 'Username wajib diisi.';
-        if (empty($fullname))   $errors[] = 'Nama lengkap wajib diisi.';
-        if (empty($email))      $errors[] = 'Email wajib diisi.';
-        if (!is_email($email))  $errors[] = 'Format email tidak valid.';
-        if (empty($password))   $errors[] = 'Password wajib diisi.';
-        if (strlen($password) < 8) $errors[] = 'Password minimal 8 karakter.';
-        if ($password !== $password2) $errors[] = 'Konfirmasi password tidak cocok.';
-        if (username_exists($username)) $errors[] = 'Username sudah digunakan.';
-        if (email_exists($email))       $errors[] = 'Email sudah terdaftar.';
+        // Validation
+        if (empty($username))   $errors[] = 'Username is required.';
+        if (empty($fullname))   $errors[] = 'Full name is required.';
+        if (empty($email))      $errors[] = 'Email is required.';
+        if (!is_email($email))  $errors[] = 'Invalid email format.';
+        if (empty($password))   $errors[] = 'Password is required.';
+        if (strlen($password) < 8) $errors[] = 'Password must be at least 8 characters.';
+        if ($password !== $password2) $errors[] = 'Password confirmation does not match.';
+        if (username_exists($username)) $errors[] = 'Username is already taken.';
+        if (email_exists($email))       $errors[] = 'Email is already registered.';
 
         if (empty($errors)) {
             $user_id = wp_create_user($username, $password, $email);
@@ -40,10 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                 $user = new WP_User($user_id);
                 $user->set_role('contributor');
 
-                // Simpan meta tambahan
+                // Save additional meta
                 update_user_meta($user_id, 'first_name', $fullname);
 
-                // Kirim email notifikasi
+                // Send notification email
                 ssdc_send_welcome_email($user_id, $email, $fullname, $username, $password);
 
                 $success = true;
@@ -65,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
             <?php else : ?>
                 <h1 class="text-3xl font-bold"><?php bloginfo('name'); ?></h1>
             <?php endif; ?>
-
         </div>
 
         <?php if ($success) : ?>
@@ -76,17 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                     </svg>
                 </div>
-                <h2 class="text-2xl font-medium mb-2">Registrasi Berhasil!</h2>
-                <p class="text-gray-500 mb-6">Silakan cek email Anda untuk detail akun dan langkah selanjutnya.</p>
+                <h2 class="text-2xl font-medium mb-2">Registration Successful!</h2>
+                <p class="text-gray-500 mb-6">Please check your email for account details and next steps.</p>
                 <a href="<?php echo wp_login_url(); ?>" class="inline-block bg-primary text-white px-6 py-3 font-medium hover:bg-primary/90 transition">
-                    Login Sekarang
+                    Login Now
                 </a>
             </div>
 
         <?php else : ?>
             <!-- Form -->
             <div class="bg-white shadow-xl p-8 rounded-lg">
-                <h2 class="text-xl font-medium mb-6">Buat Akun</h2>
+                <h2 class="text-xl font-medium mb-6">Create an Account</h2>
 
                 <?php if (!empty($errors)) : ?>
                     <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 mb-6 text-sm">
@@ -102,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                     <?php wp_nonce_field('ssdc_register_action', 'ssdc_register_nonce'); ?>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
                         <input
                             type="text"
                             name="fullname"
@@ -137,26 +135,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         />
                     </div>
 
-                 
-
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Password <span class="text-red-500">*</span></label>
                         <input
                             type="password"
                             name="password"
                             class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
-                            placeholder="Minimal 8 karakter"
+                            placeholder="Minimum 8 characters"
                             required
                         />
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password <span class="text-red-500">*</span></label>
                         <input
                             type="password"
                             name="password2"
                             class="w-full border border-gray-300 px-4 py-2.5 focus:outline-none focus:border-primary text-sm rounded-full"
-                            placeholder="Ulangi password"
+                            placeholder="Repeat password"
                             required
                         />
                     </div>
@@ -165,13 +161,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ssdc_register_nonce']
                         type="submit"
                         class="w-full bg-primary text-white py-3 font-medium hover:bg-primary/90 transition text-sm tracking-wide rounded-full"
                     >
-                        Daftar Sekarang
+                        Register Now
                     </button>
                 </form>
 
                 <p class="text-center text-sm text-gray-500 mt-6">
-                    Sudah punya akun?
-                    <a href="<?php echo wp_login_url(); ?>" class="text-primary hover:underline">Login di sini</a>
+                    Already have an account?
+                    <a href="<?php echo wp_login_url(); ?>" class="text-primary hover:underline">Login here</a>
                 </p>
             </div>
         <?php endif; ?>
