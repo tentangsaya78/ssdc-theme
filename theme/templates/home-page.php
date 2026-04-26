@@ -8,6 +8,7 @@ $bg_image = get_template_directory_uri() . '/assets/bg-hero.svg';?>
 get_template_part( 'template-parts/home/hero' );
 get_template_part( 'template-parts/home/about');
 get_template_part( 'template-parts/home/video');
+
 get_template_part( 'template-parts/home/judges');
 get_template_part( 'template-parts/home/rule');
 get_template_part( 'template-parts/home/cta');

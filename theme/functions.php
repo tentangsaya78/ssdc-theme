@@ -334,3 +334,38 @@ function custom_login_styles()
 	</style>
 <?php }
 add_action('login_enqueue_scripts', 'custom_login_styles');
+
+// contact form
+//==================================
+
+// Menangani request AJAX
+add_action('wp_ajax_handle_contact_form', 'handle_contact_form');
+add_action('wp_ajax_nopriv_handle_contact_form', 'handle_contact_form');
+
+function handle_contact_form() {
+    // 1. Verifikasi Nonce
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'contact_form_nonce')) {
+        wp_send_json_error('Security check failed.');
+    }
+
+    // 2. Sanitasi Input
+    $name    = sanitize_text_field($_POST['name']);
+    $email   = sanitize_email($_POST['email']);
+    $message = sanitize_textarea_field($_POST['message']);
+
+    if (empty($name) || empty($email) || empty($message)) {
+        wp_send_json_error('All fields are required.');
+    }
+
+    // 3. Kirim Email
+    $to      = get_field('email', 'option'); // Email admin website 
+    $subject = "New Contact Form Message from " . $name;
+    $body    = "Name: $name\nEmail: $email\n\nMessage:\n$message";
+    $headers = array('Content-Type: text/plain; charset=UTF-8', 'Reply-To: ' . $email);
+
+    if (wp_mail($to, $subject, $body, $headers)) {
+        wp_send_json_success('Thank you! Your message has been sent.');
+    } else {
+        wp_send_json_error('Failed to send message. Please try again later.');
+    }
+}

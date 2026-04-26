@@ -71,6 +71,9 @@ table{
 .ssdc-select{
     @apply appearance-none;
 }
+textarea.ssdc-input{
+    @apply rounded-xl;
+}
 
 .chevron, .ssdc-chevron {
     @apply absolute right-2 inset-y-0 flex items-center pointer-events-none;
