@@ -4,7 +4,7 @@ if( has_custom_logo() ) {
     $custom_logo_id = get_theme_mod( 'custom_logo' );
     $custom_logo_url = wp_get_attachment_url( $custom_logo_id );
 }
-
+$logo_hero = get_field( 'logo_hero' );
 $title = get_field( 'hero_title' );
 $sub_title = get_field( 'hero_sub_title' );
 $date = get_field( 'date' );
@@ -17,7 +17,9 @@ $button = get_field( 'hero_button' );
 <section id="home" class="hero pt-32 pb:40 lg:pb-80 ">
     <div class="px-6 lg:px-10 mb-8">
         <div class="max-w-[870px]">
-            <img src="<?php echo $custom_logo_url; ?>" class="max-w-[229px] mb-6 lg:mb-14" alt="" />
+            <?php if($logo_hero): ?>
+            <img src="<?php echo $logo_hero['url']; ?>" class="max-w-[229px] mb-6 lg:mb-14" alt="" />
+            <?php endif; ?>
             <?php 
             if ( $title ) {
               

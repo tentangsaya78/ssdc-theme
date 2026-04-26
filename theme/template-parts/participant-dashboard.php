@@ -25,8 +25,8 @@ $timeline = [
     ['key' => 'registered',  'label' => 'Registration',       'desc' => 'Account created',               'icon' => 'bi-person-check'],
     ['key' => 'submitted',   'label' => 'Form Submitted',      'desc' => 'Team data submitted',           'icon' => 'bi-send-check'],
     ['key' => 'reviewing',   'label' => 'Under Review',        'desc' => 'Panitia sedang mereview data',  'icon' => 'bi-hourglass-split'],
-    ['key' => 'approved',    'label' => 'Approved',            'desc' => 'Pendaftaran disetujui',         'icon' => 'bi-patch-check'],
-    ['key' => 'competing',   'label' => 'Competition Phase',   'desc' => 'Kompetisi sedang berlangsung',  'icon' => 'bi-trophy'],
+    ['key' => 'approved',    'label' => 'Approved',            'desc' => 'Registration approved',         'icon' => 'bi-patch-check'],
+    ['key' => 'competing',   'label' => 'Competition Phase',   'desc' => 'Competition is underway',  'icon' => 'bi-trophy'],
 ];
 
 // Determine current step
@@ -251,52 +251,97 @@ $important_dates = [
                     </div>
 
                     <!-- Submission Card -->
+                  <!-- Submission Card -->
+                    <?php
+                    $submission_open_date = new DateTime('2026-05-21 00:00:00', new DateTimeZone('Asia/Jakarta')); // 12 May 2026 - 00:00:00', new DateTimeZone('Asia/Jakarta'));
+                    $now                  = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+                    $submission_locked    = $now < $submission_open_date;
+
+                    $sub_link = get_post_meta($post_id, 'submission_link', true);
+                    $sub_file = get_post_meta($post_id, 'submission_file_url', true);
+                    $has_sub  = $sub_link || $sub_file;
+                    ?>
                     <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden">
+
+                        <!-- Header -->
                         <div class="px-6 py-4 border-b border-secondary/5 flex items-center justify-between">
                             <p class="text-xs uppercase tracking-widest text-secondary font-medium">Submission</p>
-                            <?php
-                            $sub_link = get_post_meta($post_id, 'submission_link', true);
-                            $sub_file = get_post_meta($post_id, 'submission_file_url', true);
-                            $has_sub  = $sub_link || $sub_file;
-                            ?>
-                            <span class="text-xs px-2.5 py-1 rounded-full font-medium <?php echo $has_sub ? 'bg-green-100 text-green-600' : 'bg-red-50 text-red-400'; ?>">
-                                <?php echo $has_sub ? '✓ Submitted' : '✗ Not Submitted'; ?>
-                            </span>
-                        </div>
-                        <div class="p-6 space-y-4">
-                            <?php if ($sub_link) : ?>
-                                <div>
-                                    <p class="text-xs text-secondary mb-1">Submission Link</p>
-                                    <a href="<?php echo esc_url($sub_link); ?>" target="_blank"
-                                        class="text-sm text-primary hover:underline flex items-center gap-1.5 break-all">
-                                        <i class="bi bi-link-45deg shrink-0"></i>
-                                        <?php echo esc_html($sub_link); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
 
-                            <?php if ($sub_file) : ?>
-                                <div>
-                                    <p class="text-xs text-secondary mb-1">Uploaded File</p>
-                                    <a href="<?php echo esc_url($sub_file); ?>" target="_blank"
-                                        class="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-2.5 rounded-full hover:bg-primary/20 transition">
-                                        <i class="bi bi-file-earmark-arrow-down"></i>
-                                        <?php echo esc_html(basename($sub_file)); ?>
-                                    </a>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if (!$has_sub) : ?>
-                                <div class="text-center py-4">
-                                    <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
-                                    <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
-                                        class="inline-flex items-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
-                                        <i class="bi bi-upload"></i> Upload Submission
-                                    </a>
-                                </div>
+                            <?php if ($submission_locked) : ?>
+                                <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-secondary/10 text-secondary flex items-center gap-1.5">
+                                    <i class="bi bi-lock-fill text-[10px]"></i> Locked
+                                </span>
+                            <?php else : ?>
+                                <span class="text-xs px-2.5 py-1 rounded-full font-medium <?php echo $has_sub ? 'bg-green-100 text-green-600' : 'bg-red-50 text-red-400'; ?>">
+                                    <?php echo $has_sub ? '✓ Submitted' : '✗ Not Submitted'; ?>
+                                </span>
                             <?php endif; ?>
                         </div>
+
+                        <?php if ($submission_locked) : ?>
+
+                            <!-- LOCKED STATE -->
+                            <div class="p-6 text-center">
+
+                                <div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3">
+                                    <i class="bi bi-lock text-2xl text-secondary/40"></i>
+                                </div>
+
+                                <p class="text-sm font-semibold text-primary mb-1">Submission Not Yet Open</p>
+                                <p class="text-xs text-secondary mb-5 leading-relaxed">
+                                    Submission will open on <strong class="text-primary">12 May 2026</strong>.<br>
+                                    Please prepare your files before the deadline.
+                                </p>
+
+                               
+
+                            </div>
+
+                          
+
+                        <?php else : ?>
+
+                            <!-- OPEN STATE -->
+                            <div class="p-6 space-y-4">
+
+                                <?php if ($sub_link) : ?>
+                                    <div>
+                                        <p class="text-xs text-secondary mb-1">Submission Link</p>
+                                        <a href="<?php echo esc_url($sub_link); ?>" target="_blank"
+                                            class="text-sm text-primary hover:underline flex items-center gap-1.5 break-all">
+                                            <i class="bi bi-link-45deg shrink-0"></i>
+                                            <?php echo esc_html($sub_link); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($sub_file) : ?>
+                                    <div>
+                                        <p class="text-xs text-secondary mb-1">Uploaded File</p>
+                                        <a href="<?php echo esc_url($sub_file); ?>" target="_blank"
+                                            class="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-2.5 rounded-full hover:bg-primary/20 transition">
+                                            <i class="bi bi-file-earmark-arrow-down"></i>
+                                            <?php echo esc_html(basename($sub_file)); ?>
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!$has_sub) : ?>
+                                    <div class="text-center py-4">
+                                        <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
+                                        <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
+                                            class="inline-flex items-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
+                                            <i class="bi bi-upload"></i> Upload Submission
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+
+                        <?php endif; // submission_locked ?>
+
                     </div>
+                    <!-- /Submission Card -->
 
                 </div><!-- /LEFT -->
 
@@ -316,21 +361,21 @@ $important_dates = [
                                     'color' => 'text-accent',
                                     'bg'    => 'bg-accent/10',
                                     'label' => 'Under Review',
-                                    'desc'  => 'Data tim kamu sedang direview oleh panitia. Kami akan memberitahu kamu segera.',
+                                    'desc'  => 'Your team data is being reviewed by the committee. We will let you know soon.',
                                 ],
                                 'publish' => [
                                     'icon'  => 'bi-patch-check-fill',
                                     'color' => 'text-green-600',
                                     'bg'    => 'bg-green-50',
                                     'label' => 'Approved!',
-                                    'desc'  => 'Selamat! Pendaftaran timmu telah disetujui. Pastikan submission sudah siap sebelum deadline.',
+                                    'desc'  => 'Happy! Your team registration has been approved. Make sure the submission is ready before the deadline.',
                                 ],
                                 'draft' => [
                                     'icon'  => 'bi-x-circle',
                                     'color' => 'text-red-500',
                                     'bg'    => 'bg-red-50',
                                     'label' => 'Needs Revision',
-                                    'desc'  => 'Data pendaftaranmu memerlukan revisi. Silakan perbarui dan submit ulang.',
+                                    'desc'  => 'Your registration data requires revision. Please update and resubmit.',
                                 ],
                                 default => [
                                     'icon'  => 'bi-question-circle',
@@ -350,7 +395,7 @@ $important_dates = [
                             <?php if ($status === 'draft') : ?>
                                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                                     class="w-full flex items-center justify-center gap-2 bg-primary text-white py-2.5 rounded-full text-sm font-medium hover:bg-primary/80 transition">
-                                    <i class="bi bi-pencil"></i> Update Data
+                                    <i class="bi bi-pencil"></i> Perbarui Data
                                 </a>
                             <?php endif; ?>
                         </div>
