@@ -100,3 +100,7 @@ textarea.ssdc-input{
 #overview-of-design-competition-inherited-futures h4{
     @apply text-3xl lg:text-4xl font-medium;
 } 
+
+.gt-current-lang{
+    @apply text-accent;
+}
