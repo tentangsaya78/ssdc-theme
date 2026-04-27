@@ -113,10 +113,7 @@ $important_dates = [
                     <h2 class="text-2xl font-bold mb-1"><?php echo esc_html($current_user->display_name); ?> 👋</h2>
                     <p class="text-sm opacity-70">
                         Team: <strong class="text-white"><?php echo pd_meta($post_id, 'team_name') ?: '—'; ?></strong>
-                        &nbsp;·&nbsp;
-                        <?php echo pd_meta($post_id, 'institution_name') ?: '—'; ?>
-                        &nbsp;·&nbsp;
-                        <?php echo pd_meta($post_id, 'country') ?: '—'; ?>
+
                     </p>
                 </div>
                 <!-- Status pill -->

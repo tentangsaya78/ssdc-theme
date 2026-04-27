@@ -52,7 +52,7 @@ $button = get_field( 'hero_button' );
         >
             <div class="flex gap-4 lg:gap-12 flex-wrap justify-center text-center lg:text-left">
                 <div>
-                    <span> organized by </span>
+                    <span> Organized by </span>
                     <img
                         src="<?php echo $organizer['organized_by']['url']; ?>"
                         class="w-[200px] h-[50px] object-contain"
