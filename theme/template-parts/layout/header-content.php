@@ -84,7 +84,7 @@ $menu = [
                     <?php echo esc_html($current_user->display_name); ?>
                 </span>
                 <a href="<?php echo esc_url(wp_logout_url(home_url())); ?>"
-                    class="p-1.5 rounded-full bg-primary text-white hover:bg-primary/80 transition-colors duration-200 shrink-0 flex items-center justify-center w-6 h-6"
+                    class="p-1.5 rounded-full bg-primary text-white hover:bg-primary/80 transition-colors duration-200 shrink-0 flex items-center justify-center w-8 h-8"
                     title="Logout">
                     <i class="bi bi-box-arrow-right text-xs leading-none"></i>
                 </a>
