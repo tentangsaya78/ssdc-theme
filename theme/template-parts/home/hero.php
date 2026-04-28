@@ -60,14 +60,6 @@ $button = get_field( 'hero_button' );
                     />
                 </div>
                 <div>
-                    <span> Suported by </span>
-                     <img
-                        src="<?php echo $organizer['suported_by']['url']; ?>"
-                        class="w-[200px] h-[50px] object-contain"
-                        alt=""
-                    />
-                </div>
-                <div>
                     <span> Sponsored by </span>
                      <img
                         src="<?php echo $organizer['sponsored_by']['url']; ?>"
