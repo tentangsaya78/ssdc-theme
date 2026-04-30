@@ -21,7 +21,7 @@ $menu = [
     "SketchUp Ecosystems"     => "/#ss",
 ];
 ?>
-
+<div x-data="{ openContact: false }">
 <header id="masthead">
 
     <!-- ===== HAMBURGER MENU (kiri) ===== -->
@@ -45,7 +45,12 @@ $menu = [
                                     <?php echo esc_html($key); ?>
                                 </a>
                             </li>
+                          
                         <?php endforeach; ?>
+
+                          <li>
+                                <button @click="openContact = true" class="text-2xl hover:text-accent duration-200 cursor-pointer">Contact</button>
+                            </li>
 
                         <!-- Login/Logout di dalam menu mobile -->
                         <li class="border-t border-secondary/20 pt-4 mt-2">
@@ -113,3 +118,15 @@ $menu = [
     </div>
 
 </header><!-- #masthead -->
+
+
+   <section x-show="openContact" class="bg-gray-100 py-20 px-6 fixed top-0 left-0 z-50 w-full h-full overflow-y-scroll flex justify-center items-center">
+        <div class="max-w-md w-full mx-auto relative">
+            <button @click="openContact = false" class="absolute top-4 right-4">
+                <i class="bi bi-x text-3xl"></i>
+            </button>
+            <?php get_template_part('template-parts/home/contact'); ?>
+        </div>
+    </section>
+
+    </div>
