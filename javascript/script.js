@@ -48,4 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
             nextBtn.addEventListener('click', () => splide.go('>'));
         }
     }
+
+    const elms2 = document.getElementById('supported');
+    if (elms2) {
+        const splide2 = new Splide(elms2, {
+            type       : 'loop',
+            perPage    : 5,
+            autoplay   : true,
+            interval   : 3000,
+            pagination : false,
+            arrows     : true,
+            speed      : 1500,
+            focus      : 'center',
+            // Tambahkan breakpoints jika diperlukan untuk responsivitas
+            breakpoints: {
+                1024: {
+                    fixedWidth: '100%',
+                    perPage: 1,
+                }
+            }
+        }).mount();
+    }
 });
