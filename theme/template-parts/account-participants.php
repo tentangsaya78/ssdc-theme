@@ -858,7 +858,7 @@ function ssdc_grade($sem_name, $year_name, $sem_val = '', $year_val = '', $requi
         <label class='ssdc-label'>Grade {$ast}</label>
         <div class='grid grid-cols-2 gap-3'>
             <input type='text' name='{$sem_name}'  placeholder='Semester' value='{$sem_val}'  class='ssdc-input' {$req} />
-            <input type='text' name='{$year_name}' placeholder='Year'     value='{$year_val}' class='ssdc-input' {$req} />
+            <input type='text' name='{$year_name}' placeholder='Admission Year'     value='{$year_val}' class='ssdc-input' {$req} />
         </div>
     </div>";
 }
