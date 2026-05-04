@@ -40,10 +40,10 @@ $i = 0;
                 />
                 <div class="p-6 h-full flex flex-col justify-between gap-6">
                     <div>
-                        <h2 class="text-7xl"><?php echo wp_kses_post($name); ?></h2>
-                        <p class="text-xl"><?php echo esc_html($title); ?></p>
+                        <h2 class="text-4xl lg:text-7xl mb-5"><?php echo wp_kses_post($name); ?></h2>
+                        <p class="lg:text-xl"><?php echo esc_html($title); ?></p>
                     </div>
-                    <p class="text-lg font-medium"><?php echo esc_html($from); ?></p>
+                    <p class="text-sm lg:text-lg font-medium"><?php echo esc_html($from); ?></p>
                 </div>
             </div>
         <?php $i++; endwhile; wp_reset_postdata(); endif; ?>

@@ -104,19 +104,19 @@ $logo_footer = get_field('logo_footer', 'option');
                 </div>
             </div>
         </div>
-        <div class="container-full mt-9 flex flex-col gap-3">
-            <p class="text-3xl">Check Us Out</p>
+        <div class="container-full mt-9 flex flex-col lg:gap-3">
+            <p class="text-xl lg:text-3xl ">Check Us Out</p>
             <div class="flex lg:flex-col lg:justify-start justify-center items-center"></div>
             <a
-                href="<?php echo $instagram['url']; ?>"
-                class="flex items-center gap-2 text-xl hover:text-accent duration-200">
-                <i class="bi bi-instagram text-3xl"></i>
+                href="<?php echo $instagram['url']; ?>" target="_blank"
+                class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200">
+                <i class="bi bi-instagram lg:text-3xl"></i>
                 <?php echo $instagram['title']; ?>
             </a>
             <button
                 @click="openContact = true"
-                class="flex items-center gap-2 text-xl hover:text-accent duration-200">
-                <i class="bi bi-envelope text-3xl"></i>
+                class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200">
+                <i class="bi bi-envelope lg:text-3xl"></i>
                 <span>Please Send Message</span>
             </button>
         </div>

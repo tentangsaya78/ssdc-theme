@@ -15,7 +15,7 @@ $button = get_field( 'hero_button' );
 
 ?>
 
-<section id="home" class="hero pt-32 pb:40 lg:pb-80 ">
+<section id="home" class="hero pt-32 pb:40 lg:pb-80 mb-16 lg:mb-0 ">
     <div class="px-6 lg:px-10 mb-8">
         <div class="max-w-[870px]">
             <?php if($logo_hero): ?>

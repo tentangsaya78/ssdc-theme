@@ -33,8 +33,8 @@ $menu = [
             ]" x-transition>
             <div class="flex items-start gap-2">
                 <button @click="menuOpen = !menuOpen" class="menu flex items-center gap-2 text-2xl">
-                    <i class="text-4xl leading-none" :class="menuOpen ? 'bi bi-x' : 'bi bi-list'"></i>
-                    <span :class="menuOpen ? 'hidden' : ''" class="text-2xl">MENU</span>
+                    <i class="lg:text-4xl leading-none" :class="menuOpen ? 'bi bi-x' : 'bi bi-list'"></i>
+                    <span :class="menuOpen ? 'hidden' : ''" class="lg:text-2xl">MENU</span>
                 </button>
 
                 <div x-show="menuOpen" x-transition>

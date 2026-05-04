@@ -1,5 +1,5 @@
-<section id="ss" class="bg-primary text-white pt-28">
-    <div class="container-full pb-28">
+<section id="ss" class="bg-primary text-white pt-16 lg:pt-28">
+    <div class="container-full pb-16 lg:pb-28">
         <h2 class="section-title">
             SketchUp <br>
             Ecosystems
