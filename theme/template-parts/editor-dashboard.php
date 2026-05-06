@@ -494,7 +494,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                                     ['Email',    'head_email'],
                                     ['Phone',    'head_phone'],
                                     ['Semester', 'head_sem'],
-                                    ['Year',     'head_year'],
+                                    ['Admission Year',     'head_year'],
                                 ] as [$l, $k]
                             ) : ?>
                                 <div>
@@ -522,7 +522,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     <div x-show="$store.editorModal.data.m2_name">
                         <p class="text-[10px] uppercase tracking-widest text-secondary mb-3 font-medium">Team Member 2</p>
                         <div class="bg-light rounded-xl p-4 grid grid-cols-2 gap-x-8 gap-y-3">
-                            <?php foreach ([['Name', 'm2_name'], ['Email', 'm2_email'], ['Phone', 'm2_phone'], ['Semester', 'm2_sem'], ['Year', 'm2_year']] as [$l, $k]) : ?>
+                            <?php foreach ([['Name', 'm2_name'], ['Email', 'm2_email'], ['Phone', 'm2_phone'], ['Semester', 'm2_sem'], ['Admission Year', 'm2_year']] as [$l, $k]) : ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $l; ?></p>
                                     <p class="text-sm font-medium text-primary" x-text="$store.editorModal.data.<?php echo $k; ?> || '—'"></p>
