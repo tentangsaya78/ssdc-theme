@@ -216,7 +216,7 @@ $important_dates = [
                                             <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[1][0]) ?: '—'; ?></p>
                                         </div>
                                         <div>
-                                            <p class="text-xs text-secondary">Year</p>
+                                            <p class="text-xs text-secondary">Admission Year</p>
                                             <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[1][1]) ?: '—'; ?></p>
                                         </div>
                                     </div>

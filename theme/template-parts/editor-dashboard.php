@@ -509,7 +509,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     <div x-show="$store.editorModal.data.m1_name">
                         <p class="text-[10px] uppercase tracking-widest text-secondary mb-3 font-medium">Team Member 1</p>
                         <div class="bg-light rounded-xl p-4 grid grid-cols-2 gap-x-8 gap-y-3">
-                            <?php foreach ([['Name', 'm1_name'], ['Email', 'm1_email'], ['Phone', 'm1_phone'], ['Semester', 'm1_sem'], ['Year', 'm1_year']] as [$l, $k]) : ?>
+                            <?php foreach ([['Name', 'm1_name'], ['Email', 'm1_email'], ['Phone', 'm1_phone'], ['Semester', 'm1_sem'], ['Admission Year', 'm1_year']] as [$l, $k]) : ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $l; ?></p>
                                     <p class="text-sm font-medium text-primary" x-text="$store.editorModal.data.<?php echo $k; ?> || '—'"></p>
