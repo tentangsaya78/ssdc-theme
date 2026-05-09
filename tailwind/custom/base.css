@@ -86,9 +86,7 @@ textarea.ssdc-input {
 }
 
 /* rule section */
-#rule {
-    @apply lg:text-justify tracking-[10%] text-sm lg:text-lg;
-}
+
 
 #rule ul {
     @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6;
