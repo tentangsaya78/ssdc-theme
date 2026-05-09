@@ -52,7 +52,7 @@ $rules = new WP_Query($args);
                                 <!--  <h2 class="text-4xl lg:text-7xl font-bold"><?php // echo $counter; 
                                                                                     ?></h2> -->
                                 <?php if (has_post_thumbnail()) : ?>
-                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($title)); ?>" />
+                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>" alt="<?php echo esc_attr(wp_strip_all_tags($title)); ?>" class="w-40 h-40 aspect-square object-cover rounded-lg"/>
                                 <?php endif; ?>
 
                             </div>
