@@ -14,6 +14,7 @@ $organizer  = get_field('organizer');
 $button = get_field('hero_button');
 
 ?>
+<div x-data="{openContact : false}">
 <section id="home" class="hero">
     <div
         class="hero-wrap py-10 bg-top-right bg-contain bg-no-repeat">
@@ -43,7 +44,7 @@ $button = get_field('hero_button');
                         <!--    button -->
                         <div class="flex flex-wrap gap-6 items-center hero-button">
                             <a href="<?php echo esc_url('/register', 'ssdc') ?>" class="btn btn-primary">Register Now</a>
-                            <a href="#" class="btn btn-outline">Contact Us</a>
+                            <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
                         </div>
 
                         <!-- sponsored -->
@@ -78,6 +79,15 @@ $button = get_field('hero_button');
     </div>
 </section>
 
+   <section x-show="openContact" class="bg-gray-100 py-20 px-6 fixed top-0 left-0 z-50 w-full h-full overflow-y-scroll flex justify-center items-center">
+        <div class="max-w-md w-full mx-auto relative">
+            <button @click="openContact = false" class="absolute top-4 right-4">
+                <i class="bi bi-x text-3xl"></i>
+            </button>
+            <?php get_template_part('template-parts/home/contact'); ?>
+        </div>
+    </section>
+</div>
 <style>
     .hero {
         background-color: #fff;

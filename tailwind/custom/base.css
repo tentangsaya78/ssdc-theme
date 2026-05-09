@@ -23,7 +23,7 @@ table {
 }
 
 .home {
-    @apply  bg-no-repeat bg-top-right;
+    @apply bg-no-repeat bg-top-right;
     background-size: 90%;
 }
 
@@ -110,17 +110,32 @@ textarea.ssdc-input {
     @apply text-accent;
 }
 
-@utility btn {
+.btn {
     @apply py-2.5 px-5 rounded-full bg-secondary text-white hover:bg-gray-600 hover:ring-2 hover:ring-offset-2 ring-gray-400 duration-300;
 }
 
-@layer components{
 .btn-primary {
-    @apply btn bg-primary hover:bg-primary/70 ;
+    @apply  bg-primary hover:bg-primary/70;
 }
+
+.btn-secondary {
+    @apply  bg-secondary hover:bg-secondary/70;
+}
+.btn-accent {
+    @apply  bg-accent hover:bg-accent/70;
+}
+.btn-outline {
+    @apply bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white;
+}
+.btn-outline-secondary {
+    @apply bg-transparent border-2 border-secondary text-secondary hover:bg-secondary hover:text-white;
+}
+.btn-outline-accent {
+    @apply bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-white;
 }
 
 
-.nav-links{
+
+.nav-links {
     @apply flex flex-wrap gap-4 justify-between;
 }
