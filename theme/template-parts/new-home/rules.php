@@ -1,3 +1,4 @@
+<section id="rule" class="py-20">
 <?php
 $args = array(
     'post_type' => 'rule',
@@ -10,7 +11,7 @@ $args = array(
 $rule = new WP_Query($args);
 
 if ($rule->have_posts()) :  ?>
-    <div class="container py-20">
+    <div class="container ">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php while ($rule->have_posts()) : $rule->the_post();
                 $rule_title = get_the_title();
@@ -39,3 +40,4 @@ if ($rule->have_posts()) :  ?>
 <?php wp_reset_postdata();
 endif;
 ?>
+</section>
