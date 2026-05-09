@@ -66,3 +66,7 @@
 .entry-content > .alignright {
 	@apply float-right ml-8;
 }
+
+.content a{
+	@apply text-primary hover:text-primary/80;
+}
