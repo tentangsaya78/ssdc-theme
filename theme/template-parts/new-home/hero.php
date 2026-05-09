@@ -81,7 +81,7 @@ $button = get_field('hero_button');
 <style>
     .hero {
         background-color: #fff;
-        background-image: url('<?php echo get_template_directory_uri(); ?>./assets/grid-2.png');
+          background-image: url('<?php echo get_template_directory_uri(); ?>/assets/grid-2.png');
     }
 
     .hero-wrap {
