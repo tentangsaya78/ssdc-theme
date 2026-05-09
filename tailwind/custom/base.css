@@ -7,21 +7,23 @@
  * file and is applied both to the front end and in the block editor.
  */
 
- html,body {
+html,
+body {
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
+
 body {
     @apply bg-background text-foreground font-sans;
-   
+
 }
 
-table{
+table {
     @apply overflow-x-auto;
 }
 
 .home {
-    @apply bg-[url('/assets/bg-hero.svg')] bg-no-repeat bg-top-right;
+    @apply  bg-no-repeat bg-top-right;
     background-size: 90%;
 }
 
@@ -30,7 +32,7 @@ table{
 }
 
 .container {
-    @apply max-w-[1280px] mx-auto px-4;
+    @apply !max-w-[1280px] mx-auto px-4;
 }
 
 .container-full {
@@ -42,16 +44,17 @@ table{
 }
 
 .section-title {
-    @apply text-4xl md:text-7xl lg:text-[153px] font-medium;
+    @apply text-5xl md:text-7xl lg:text-[153px] font-medium;
 }
 
 .my-paragraph {
-    @apply lg:text-justify lg:tracking-[10%] ;
+    @apply lg:text-justify lg:tracking-[10%];
 }
 
-.my-paragraph p{
+.my-paragraph p {
     @apply mb-6;
 }
+
 .form-section-title {
     @apply text-2xl font-medium;
 }
@@ -68,39 +71,56 @@ table{
 .ssdc-select {
     @apply bg-light border border-secondary/20 rounded-full px-5 py-3 text-sm text-primary focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition w-full;
 }
-.ssdc-select{
+
+.ssdc-select {
     @apply appearance-none;
 }
-textarea.ssdc-input{
+
+textarea.ssdc-input {
     @apply rounded-xl;
 }
 
-.chevron, .ssdc-chevron {
+.chevron,
+.ssdc-chevron {
     @apply absolute right-2 inset-y-0 flex items-center pointer-events-none;
 }
 
 /* rule section */
-#rule{
+#rule {
     @apply lg:text-justify tracking-[10%] text-sm lg:text-lg;
 }
 
-#rule ul{
-    @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6 ;
+#rule ul {
+    @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6;
 }
 
-#rule table
-{
+#rule table {
     @apply table-auto overflow-x-auto;
 }
 
-#rule table td{
+#rule table td {
     @apply p-2;
 }
 
-#overview-of-design-competition-inherited-futures h4{
+#overview-of-design-competition-inherited-futures h4 {
     @apply text-3xl lg:text-4xl font-medium;
-} 
+}
 
-.gt-current-lang{
+.gt-current-lang {
     @apply text-accent;
+}
+
+@utility btn {
+    @apply py-2.5 px-5 rounded-full bg-secondary text-white hover:bg-gray-600 hover:ring-2 hover:ring-offset-2 ring-gray-400 duration-300;
+}
+
+@layer components{
+.btn-primary {
+    @apply btn bg-primary hover:bg-primary/70 ;
+}
+}
+
+
+.nav-links{
+    @apply flex flex-wrap gap-4 justify-between;
 }

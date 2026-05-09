@@ -11,13 +11,22 @@
 
 import Alpine from 'alpinejs'
 import Splide from '@splidejs/splide';
+import { animateHero } from './animate/hero';
+import { animation } from './animate/animation';
+
 
  
 window.Alpine = Alpine
+
+
  
 Alpine.start()
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    animateHero();
+    animation();
+
     const elms = document.getElementById('splide-ecosystem');
     
     if (elms) {

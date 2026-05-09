@@ -45,7 +45,14 @@
 		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 
-	/**
-	 * Add your theme below:
-	 */
+/**
+ * Add your theme below:
+ */
+	--text-h1: calc(1rem * 1.25^5);
+	--text-h2: calc(1rem * 1.25^4);
+	--text-h3: calc(1rem * 1.25^3);
+	--text-h4: calc(1rem * 1.25^2);
+	--text-h5: calc(1rem * 1.25^1);
+	--text-h6: 1rem;
 }
+
