@@ -135,5 +135,5 @@ textarea.ssdc-input {
 
 
 .nav-links {
-    @apply flex flex-wrap gap-4 justify-between;
+    @apply flex flex-wrap gap-4 justify-between font-normal;
 }

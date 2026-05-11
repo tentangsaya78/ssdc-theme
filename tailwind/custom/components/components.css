@@ -68,5 +68,5 @@
 }
 
 .content a{
-	@apply text-primary hover:text-primary/80;
+	@apply text-primary font-medium hover:text-primary/80;
 }

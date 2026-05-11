@@ -5,7 +5,7 @@ $tagline = get_field('tagline');
 $about_description = get_field('about_description');
 $menus = get_field('about_menu');
 ?>
-<section x-data="{openContact: false}" id="about" class="py-20">
+<section x-data="{openContact: false}" id="about" class="py-16">
     <div class="container ">
         <div class="grid grid-cols-1 md:grid-cols-6 items-center gap-6 lg:gap-10">
             <div class="md:col-span-4">

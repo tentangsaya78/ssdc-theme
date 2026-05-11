@@ -17,10 +17,10 @@ $button = get_field('hero_button');
 <div x-data="{openContact : false}">
 <section id="home" class="hero">
     <div
-        class="hero-wrap py-10 bg-top-right bg-contain bg-no-repeat">
+        class="hero-wrap py-20 bg-top-right bg-contain bg-no-repeat">
         <div class="container">
             <div
-                class="grid grid-cols-1 md:grid-cols-6 gap-4 items-center min-h-screen">
+                class="grid grid-cols-1 md:grid-cols-6 gap-4 items-center ">
                 <div class="kiri md:col-span-4 flex flex-col gap-4">
                     <img
                         src="./logo.svg"
