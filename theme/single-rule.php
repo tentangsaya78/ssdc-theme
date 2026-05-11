@@ -29,19 +29,19 @@ $rules = new WP_Query($args);
     </div>
     <div class="container pb-20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <div class="lg:col-span-3 sticky top-40 self-start">
-                <?php if ($rules->have_posts()): ?>
+       <!--      <div class="lg:col-span-3 sticky top-40 self-start">
+                <?php // if ($rules->have_posts()): ?>
                     <ul class="rules-list ">
-                        <?php while ($rules->have_posts()): $rules->the_post(); ?>
-                            <li class="mb-3 <?php /* current rule */ echo get_the_ID() === get_queried_object_id() ? 'text-primary font-medium' : '' ?>">
-                                <a href="<?php echo get_the_permalink(); ?>" class="text-lg hover:text-accent duration-200">
-                                    <?php echo get_the_title(); ?>
+                        <?php // while ($rules->have_posts()): $rules->the_post(); ?>
+                            <li class="mb-3 <?php /* current rule */ // echo get_the_ID() === get_queried_object_id() ? 'text-primary font-medium' : '' ?>">
+                                <a href="<?php // echo get_the_permalink(); ?>" class="text-lg hover:text-accent duration-200">
+                                    <?php // echo get_the_title(); ?>
                                 </a>
                             </li>
-                        <?php endwhile; ?>
+                        <?php // endwhile; ?>
                     </ul>
-                <?php endif; ?>
-            </div>
+                <?php // endif; ?>
+            </div> -->
             <div class="lg:col-span-9 content">
                 <?php while (have_posts()) : the_post(); ?>
                     <?php the_content(); ?>
