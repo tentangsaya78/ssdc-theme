@@ -117,7 +117,7 @@ $logo_footer = get_field('logo_footer', 'option');
                 @click="openContact = true"
                 class="flex items-center gap-2  hover:text-accent duration-200 cursor-pointer">
                 <i class="bi bi-envelope lg:text-xl"></i>
-                <span>Please Send Message</span>
+                <span> For any further question please send message</span>
             </button>
         </div>
     </section>
