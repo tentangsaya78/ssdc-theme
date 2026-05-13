@@ -844,4 +844,5 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
         }));
     });
+    
 </script>
