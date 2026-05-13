@@ -111,16 +111,14 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                 <i class="bi bi-person-circle"></i>
                 <span class="text-sm opacity-60 hidden md:block"><?php echo esc_html($current_user->display_name); ?></span>
             </div>
-
-            <!--   <span class="text-xs bg-white/10 border border-white/20 px-3 py-1 rounded-full">Editor</span> -->
             <a href="<?php echo wp_logout_url(home_url()); ?>"
                 class="text-xs border border-white/20 px-3 py-1.5 rounded-full hover:bg-white/10 transition">
                 <i class="bi bi-box-arrow-right"></i>
                 Logout
             </a>
-
-            <div class="  rounded-full pl-3 bg-white border border-secondary/20 flex gap-2 items-center">
-                <i class="bi bi-translate text-primary"></i> <span class="p-2 rounded-full bg-primary text-white text-sm"> <?php echo do_shortcode('[gtranslate]'); ?></span>
+            <div class="rounded-full pl-3 bg-white border border-secondary/20 flex gap-2 items-center">
+                <i class="bi bi-translate text-primary"></i>
+                <span class="p-2 rounded-full bg-primary text-white text-sm"> <?php echo do_shortcode('[gtranslate]'); ?></span>
             </div>
         </div>
     </div>
@@ -272,7 +270,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                             </tr>
                         </thead>
                         <tbody>
-                            <template x-for="(row, i) in filtered" :key="row.post_id">
+                            <template x-for="(row, i) in paginated" :key="row.post_id">
                                 <tr class="border-b border-secondary/5 hover:bg-light/60 transition"
                                     :class="selected.includes(row.post_id) ? 'bg-primary/5' : ''">
 
@@ -284,7 +282,8 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                                             class="rounded accent-primary cursor-pointer" />
                                     </td>
 
-                                    <td class="px-4 py-4 text-xs text-secondary/50" x-text="i + 1"></td>
+                                    <td class="px-4 py-4 text-xs text-secondary/50"
+                                        x-text="(page - 1) * perPage + i + 1"></td>
 
                                     <td class="px-4 py-4 cursor-pointer" @click="openDetail(row)">
                                         <p class="font-semibold text-primary hover:underline" x-text="row.team_name || '—'"></p>
@@ -378,14 +377,87 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     </table>
                 </div>
 
-                <!-- Table Footer -->
-                <div class="px-5 py-3.5 border-t border-secondary/5 flex items-center justify-between">
-                    <p class="text-xs text-secondary">
-                        Showing <span class="font-medium text-primary" x-text="filtered.length"></span>
-                        of <span class="font-medium text-primary"><?php echo $total; ?></span>
-                        <span x-show="selected.length"> &mdash; <span class="text-accent font-medium" x-text="selected.length + ' selected'"></span></span>
-                    </p>
-                    <p class="text-xs text-secondary">Click team name to view full detail</p>
+                <!-- ── Table Footer + Pagination ── -->
+                <div class="px-5 py-3.5 border-t border-secondary/5 flex flex-col sm:flex-row items-center justify-between gap-3">
+
+                    <!-- Left: info + per-page -->
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <p class="text-xs text-secondary">
+                            Showing
+                            <span class="font-medium text-primary" x-text="filtered.length === 0 ? 0 : (page - 1) * perPage + 1"></span>–<span class="font-medium text-primary" x-text="Math.min(page * perPage, filtered.length)"></span>
+                            of <span class="font-medium text-primary" x-text="filtered.length"></span>
+                            <span x-show="selected.length"> &mdash; <span class="text-accent font-medium" x-text="selected.length + ' selected'"></span></span>
+                        </p>
+
+                        <!-- Per page selector -->
+                        <div class="relative">
+                            <select x-model.number="perPage"
+                                class="bg-light border border-secondary/10 rounded-full px-3 py-1.5 text-xs text-primary appearance-none pr-7 focus:outline-none focus:ring-2 focus:ring-primary/20">
+                                <option value="10">10 / page</option>
+                                <option value="25">25 / page</option>
+                                <option value="50">50 / page</option>
+                                <option value="100">100 / page</option>
+                            </select>
+                            <i class="bi bi-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-secondary/50 text-[10px] pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Right: pagination controls -->
+                    <div class="flex items-center gap-1" x-show="totalPages > 1">
+
+                        <!-- First + Prev -->
+                        <button
+                            @click="page = 1"
+                            :disabled="page === 1"
+                            :class="page === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-secondary/10 hover:text-primary'"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-secondary text-sm transition"
+                            title="First page">
+                            <i class="bi bi-chevron-double-left text-xs"></i>
+                        </button>
+                        <button
+                            @click="page > 1 && page--"
+                            :disabled="page === 1"
+                            :class="page === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:bg-secondary/10 hover:text-primary'"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-secondary text-sm transition"
+                            title="Previous page">
+                            <i class="bi bi-chevron-left text-xs"></i>
+                        </button>
+
+                        <!-- Page numbers -->
+                        <template x-for="(p, idx) in pageNumbers" :key="idx">
+                            <template x-if="p === '...'">
+                                <span class="w-8 h-8 flex items-center justify-center text-xs text-secondary/40">…</span>
+                            </template>
+                            <template x-if="p !== '...'">
+                                <button
+                                    @click="page = p"
+                                    :class="page === p
+                                        ? 'bg-primary text-white shadow-sm'
+                                        : 'text-secondary hover:bg-secondary/10 hover:text-primary'"
+                                    class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition"
+                                    x-text="p">
+                                </button>
+                            </template>
+                        </template>
+
+                        <!-- Next + Last -->
+                        <button
+                            @click="page < totalPages && page++"
+                            :disabled="page === totalPages"
+                            :class="page === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:bg-secondary/10 hover:text-primary'"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-secondary text-sm transition"
+                            title="Next page">
+                            <i class="bi bi-chevron-right text-xs"></i>
+                        </button>
+                        <button
+                            @click="page = totalPages"
+                            :disabled="page === totalPages"
+                            :class="page === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:bg-secondary/10 hover:text-primary'"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-secondary text-sm transition"
+                            title="Last page">
+                            <i class="bi bi-chevron-double-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -601,8 +673,19 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             selected: [],
             bulkAction: '',
 
-            init() {},
+            // ── Pagination state
+            page: 1,
+            perPage: 10,
 
+            init() {
+                // Reset ke halaman 1 setiap kali filter / search berubah
+                this.$watch('search',       () => { this.page = 1; });
+                this.$watch('filterStatus', () => { this.page = 1; });
+                this.$watch('filterRegion', () => { this.page = 1; });
+                this.$watch('perPage',      () => { this.page = 1; });
+            },
+
+            // ── Semua data setelah filter & sort (dipakai CSV/PDF export & select-all)
             get filtered() {
                 let data = [...this.rows];
                 const q = this.search.toLowerCase();
@@ -628,19 +711,50 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                 return data;
             },
 
+            // ── Hanya data untuk halaman aktif (dipakai x-for di tabel)
+            get paginated() {
+                const start = (this.page - 1) * this.perPage;
+                return this.filtered.slice(start, start + this.perPage);
+            },
+
+            // ── Total halaman
+            get totalPages() {
+                return Math.max(1, Math.ceil(this.filtered.length / this.perPage));
+            },
+
+            // ── Nomor halaman dengan ellipsis
+            get pageNumbers() {
+                const total = this.totalPages;
+                const current = this.page;
+                const delta = 2;
+                const range = [];
+
+                for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+                    range.push(i);
+                }
+
+                if (current - delta > 2)       range.unshift('...');
+                if (current + delta < total - 1) range.push('...');
+
+                range.unshift(1);
+                if (total > 1) range.push(total);
+
+                return range;
+            },
+
             sortBy(field) {
-                this.sort.field === field ? (this.sort.asc = !this.sort.asc) : (this.sort = {
-                    field,
-                    asc: true
-                });
+                this.sort.field === field
+                    ? (this.sort.asc = !this.sort.asc)
+                    : (this.sort = { field, asc: true });
             },
 
             toggleSelect(id) {
-                this.selected.includes(id) ?
-                    (this.selected = this.selected.filter(i => i !== id)) :
-                    this.selected.push(id);
+                this.selected.includes(id)
+                    ? (this.selected = this.selected.filter(i => i !== id))
+                    : this.selected.push(id);
             },
 
+            // Select all menggunakan filtered (semua halaman)
             selectAll() {
                 this.selected = this.filtered.map(r => r.post_id);
             },
@@ -659,14 +773,10 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             },
 
             statusLabel(s) {
-                return {
-                    pending: 'Under Review',
-                    publish: 'Approved',
-                    draft: 'Rejected'
-                } [s] || s;
+                return { pending: 'Under Review', publish: 'Approved', draft: 'Rejected' }[s] || s;
             },
 
-            // ── CSV Export
+            // ── CSV Export (semua filtered, bukan hanya halaman aktif)
             exportCSV() {
                 const cols = ['#', 'Team', 'Head Name', 'Head Email', 'Head Phone',
                     'Member 1', 'Member 2', 'Lecturer', 'Institution',
@@ -691,11 +801,9 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                 a.click();
             },
 
-            // ── PDF Export
+            // ── PDF Export (semua filtered, bukan hanya halaman aktif)
             exportPDF() {
-                const {
-                    jsPDF
-                } = window.jspdf;
+                const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({
                     orientation: 'landscape',
                     unit: 'mm',
@@ -714,9 +822,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
                 doc.autoTable({
                     startY: 25,
-                    head: [
-                        ['#', 'Team', 'Head of Team', 'Country', 'Institution', 'Category', 'Status', 'Date']
-                    ],
+                    head: [['#', 'Team', 'Head of Team', 'Country', 'Institution', 'Category', 'Status', 'Date']],
                     body: this.filtered.map((r, i) => [
                         i + 1,
                         r.team_name || '—',
@@ -727,23 +833,10 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                         this.statusLabel(r.status),
                         r.date_fmt,
                     ]),
-                    styles: {
-                        fontSize: 8,
-                        cellPadding: 3
-                    },
-                    headStyles: {
-                        fillColor: [30, 30, 60],
-                        textColor: 255,
-                        fontStyle: 'bold'
-                    },
-                    alternateRowStyles: {
-                        fillColor: [247, 248, 252]
-                    },
-                    columnStyles: {
-                        2: {
-                            cellWidth: 50
-                        }
-                    },
+                    styles: { fontSize: 8, cellPadding: 3 },
+                    headStyles: { fillColor: [30, 30, 60], textColor: 255, fontStyle: 'bold' },
+                    alternateRowStyles: { fillColor: [247, 248, 252] },
+                    columnStyles: { 2: { cellWidth: 50 } },
                 });
 
                 doc.save(`ssdc2026-participants-${new Date().toISOString().slice(0,10)}.pdf`);
