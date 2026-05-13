@@ -48,6 +48,7 @@ $rules = new WP_Query($args);
                 <?php endwhile;
 
                 if (is_singular('rule')): ?>
+                  <a href="/#rule">Back to Menu</a>
                     <div class="py-5 border-t border-gray-300 mt-20">
                         <?php
                         the_post_navigation(
@@ -55,6 +56,7 @@ $rules = new WP_Query($args);
                                 'next_text' => '<span aria-hidden="true" class="text-sm italic text-muted">' . __('Next ', 'ssdc') . '</span> ' .
                                     '<span class="sr-only">' . __('Next:', 'ssdc') . '</span> <br/>' .
                                     '<span class="font-medium">%title</span>',
+                                    
                                 'prev_text' => '<span aria-hidden="true" class="text-sm italic text-muted">' . __('Previous ', 'ssdc') . '</span> ' .
                                     '<span class="sr-only ">' . __('Previous:', 'ssdc') . '</span> <br/>' .
                                     '<span class="font-medium">%title</span>',

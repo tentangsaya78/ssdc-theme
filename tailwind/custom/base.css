@@ -44,7 +44,7 @@ table {
 }
 
 .section-title {
-    @apply text-5xl md:text-7xl lg:text-[153px] font-medium;
+    @apply text-5xl md:text-7xl lg:text-[100px] font-medium;
 }
 
 .my-paragraph {

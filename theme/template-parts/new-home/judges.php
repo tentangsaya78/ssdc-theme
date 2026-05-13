@@ -40,7 +40,7 @@ $i = 0;
                 />
                 <div class="p-6 h-full flex flex-col justify-between gap-6">
                     <div>
-                        <h2 class="text-4xl lg:text-7xl mb-5"><?php echo wp_kses_post($name); ?></h2>
+                        <h2 class="text-4xl lg:text-5xl mb-5"><?php echo wp_kses_post($name); ?></h2>
                         <p class=""><?php echo esc_html($title); ?></p>
                     </div>
                     <p class="text-sm lg:text-lg italic"><?php echo esc_html($from); ?></p>

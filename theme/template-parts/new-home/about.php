@@ -16,7 +16,7 @@ $menus = get_field('about_menu');
                     <h3 class="text-2xl font-medium mb-5 tracking-[10%]"><?php echo $sub_title; ?></h3>
                 <?php endif; ?>
                 <?php if ($tagline): ?>
-                    <p class="text-xl lg:text-5xl font-medium uppercase mb-10"> <?php echo $tagline; ?></p>
+                    <p class="text-xl lg:text-3xl font-medium uppercase mb-10"> <?php echo $tagline; ?></p>
                 <?php endif; ?>
                 <?php if ($about_description): ?>
                     <div class=" flex flex-col gap-6">

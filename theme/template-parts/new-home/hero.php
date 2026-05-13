@@ -23,7 +23,7 @@ $button = get_field('hero_button');
                 class="grid grid-cols-1 md:grid-cols-6 gap-4 items-center ">
                 <div class="kiri md:col-span-4 flex flex-col gap-4">
                     <img
-                        src="./logo.svg"
+                        src="<?php echo $logo_hero['url']; ?>"
                         alt=""
                         class="w-full h-auto max-w-[160px]" />
                     <div class="mb-6">
