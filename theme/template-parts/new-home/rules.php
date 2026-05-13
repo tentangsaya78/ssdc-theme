@@ -27,7 +27,7 @@ if ($rule->have_posts()) :  ?>
                             <img src="<?php echo esc_url($rule_image); ?>" alt="<?php echo esc_attr($rule_title); ?>" class="w-full h-full object-cover group-hover:scale-105 duration-300">
                         <?php endif; ?>
                     </div>
-                    <div class="rule-item__content p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-2xl lg:text-3xl text-white text-center">
+                    <div class="rule-item__content p-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-2xl lg:text-4xl text-white text-center">
                         <h4 class="rule-item__title">
                             <?php echo esc_html($rule_title); ?>
                         </h4>

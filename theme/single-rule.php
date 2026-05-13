@@ -48,8 +48,9 @@ $rules = new WP_Query($args);
                 <?php endwhile;
 
                 if (is_singular('rule')): ?>
-                  <a href="/#rule">Back to Menu</a>
-                    <div class="py-5 border-t border-gray-300 mt-20">
+                  <a href="/#rule" class=" mb-5 mt-5 block hover:text-accent duration-200">Back to Menu <i class="bi bi-arrow-right"></i></a>
+                    <div class="pb-5 pt-5 border-t border-gray-300 mt-10">
+                        
                         <?php
                         the_post_navigation(
                             array(
