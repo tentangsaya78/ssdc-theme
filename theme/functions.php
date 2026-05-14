@@ -235,6 +235,9 @@ require get_template_directory() . '/inc/register-functions.php';
 // inc/participants-post-type.php
 require get_template_directory() . '/inc/participants-post-type.php';
 
+// inc//ajax-handler.php
+require get_template_directory() . '/inc/ssdc-ajax-handler.php';
+
 
 
 
