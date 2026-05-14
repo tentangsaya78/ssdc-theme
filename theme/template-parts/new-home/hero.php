@@ -32,7 +32,7 @@ $button = get_field('hero_button');
                         </div>
 
                         <div class="md:col-span-2 gap-6 flex flex-col">
-                            <div class="flex flex-wrap gap-4 lg:gap-6">
+                            <div class="flex flex-wrap gap-4 lg:gap-6 ">
                                 <div class="">
                                     <div class="text-xl font-medium p-2 max-w-max mb-2 date relative">
                                         <div class="aksen-date absolute top-0 left-0 w-full h-full bg-accent"></div>
@@ -41,37 +41,39 @@ $button = get_field('hero_button');
                                     </div>
                                     <p class="italic hero-location"><?php echo $hero_location; ?></p>
                                 </div>
-                                <!-- sponsored -->
-                                <div class="flex flex-wrap gap-4  hero-organizer">
-                                    <?php if ($organizer): ?>
-                                        <div>
-                                            <p class="font-medium mb-2 text-gray-500">
-                                                Organized by
-                                            </p>
-                                            <img
-                                                src="<?php echo $organizer['organized_by']['url'] ?>"
-                                                alt=""
-                                                class="w-full h-auto max-w-[160px]" />
-                                        </div>
-                                        <div>
-                                            <p class="font-medium text-gray-500 mb-3">
-                                                Sponsored by
-                                            </p>
-                                            <img
-                                                src="<?php echo $organizer['sponsored_by']['url'] ?>"
-                                                alt=""
-                                                class="w-full h-auto max-w-[160px]" />
-                                        </div>
-                                    <?php endif; ?>
 
+                                <!--    button -->
+                                <div class="flex flex-wrap gap-6 max-h-max hero-button">
+                                    <a href="<?php echo esc_url('/register', 'ssdc') ?>" class="btn btn-primary">Register Now</a>
+                                    <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
                                 </div>
+
                             </div>
 
 
-                            <!--    button -->
-                            <div class="flex flex-wrap gap-6 items-center hero-button">
-                                <a href="<?php echo esc_url('/register', 'ssdc') ?>" class="btn btn-primary">Register Now</a>
-                                <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
+                            <!-- sponsored -->
+                            <div class="flex flex-wrap gap-4  hero-organizer">
+                                <?php if ($organizer): ?>
+                                    <div>
+                                        <p class="font-medium mb-2 text-gray-500">
+                                            Organized by
+                                        </p>
+                                        <img
+                                            src="<?php echo $organizer['organized_by']['url'] ?>"
+                                            alt=""
+                                            class="w-full h-auto max-w-[160px]" />
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-500 mb-3">
+                                            Sponsored by
+                                        </p>
+                                        <img
+                                            src="<?php echo $organizer['sponsored_by']['url'] ?>"
+                                            alt=""
+                                            class="w-full h-auto max-w-[160px]" />
+                                    </div>
+                                <?php endif; ?>
+
                             </div>
 
 
