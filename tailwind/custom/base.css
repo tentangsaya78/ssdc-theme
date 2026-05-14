@@ -100,8 +100,8 @@ textarea.ssdc-input {
     @apply p-2;
 }
 
-.single-rule ul {
-    @apply list-disc flex flex-col  pl-2 ;
+.rule-content ul {
+    @apply list-disc flex flex-col pl-2 ;
 }
 
 #overview-of-design-competition-inherited-futures h4 {

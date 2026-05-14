@@ -42,7 +42,7 @@ $rules = new WP_Query($args);
                     </ul>
                 <?php // endif; ?>
             </div> -->
-            <div class="lg:col-span-9 content">
+            <div class="lg:col-span-9 rule-content">
                 <?php while (have_posts()) : the_post(); ?>
                     <?php the_content(); ?>
                 <?php endwhile;
