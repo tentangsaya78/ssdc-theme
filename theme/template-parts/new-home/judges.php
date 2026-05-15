@@ -28,16 +28,16 @@ $i = 0;
             $color  = get_field('color');
             $id     = get_the_ID();
         ?>
-            <div
-                class="flex flex-col <?php echo esc_attr($color); ?> group cursor-pointer"
+            <div class="flex flex-col <?php echo esc_attr($color); ?> group cursor-pointer relative "
                 x-data
                 @click="$dispatch('open-judge', { id: <?php echo $id; ?> })"
             >
                 <img
                     src="<?php echo esc_url($photo); ?>"
                     alt="<?php echo esc_attr(wp_strip_all_tags($name)); ?>"
-                    class="w-full aspect-square group-hover:opacity-80 duration-200"
+                    class="w-full aspect-square group-hover:opacity-30 duration-200"
                 />
+                <i class="bi bi-arrows-fullscreen text-white/70 text-3xl absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100"></i>
                 <div class="p-6 h-full flex flex-col justify-between gap-6">
                     <div>
                         <h2 class="text-3xl lg:text-4xl mb-5"><?php echo wp_kses_post($name); ?></h2>
