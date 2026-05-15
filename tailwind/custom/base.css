@@ -85,9 +85,18 @@ textarea.ssdc-input {
     @apply absolute right-2 inset-y-0 flex items-center pointer-events-none;
 }
 
-/* rule section */
+/* rule section 
+=====================================*/
 
-
+.rule-content a{
+    @apply underline text-primary font-medium hover:text-accent duration-200;
+}
+.rule-content .rule-footer a{
+    @apply no-underline text-primary font-normal hover:text-accent duration-200;
+}
+.rule-content p{
+    @apply mb-5;
+}
 #rule ul {
     @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6;
 }
@@ -122,12 +131,7 @@ textarea.ssdc-input {
     @apply p-2 border-b border-gray-300;
 }
 
-.rule-content a{
-    @apply underline text-primary font-medium hover:text-accent duration-200;
-}
-.rule-content .rule-footer a{
-    @apply no-underline text-primary font-normal hover:text-accent duration-200;
-}
+
 
 #overview-of-design-competition-inherited-futures h4 {
     @apply text-3xl lg:text-4xl font-medium;

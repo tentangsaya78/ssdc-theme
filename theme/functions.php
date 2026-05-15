@@ -241,9 +241,22 @@ require get_template_directory() . '/inc/ssdc-ajax-handler.php';
 
 
 
+
 /* ===============================
 *** ==========TANBAHAN ==========***
 ==================================*/
+// tambahan class body by slug
+// Add slug to body class
+function ssdc_add_slug_to_body_class( $classes ) {
+    global $post;
+    if ( isset( $post ) ) {
+        $classes[] = $post->post_type . '-' . $post->post_name;
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'ssdc_add_slug_to_body_class' );
+
+
 // disable admin bar
 
 add_filter('show_admin_bar', '__return_false');
