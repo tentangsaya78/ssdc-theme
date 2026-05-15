@@ -101,9 +101,15 @@ textarea.ssdc-input {
 }
 
 .rule-content ul {
-    @apply list-disc flex flex-col pl-4 ;
+    @apply list-disc pl-4 ;
 }
 
+.rule-content ul ul{
+    @apply list-disc  pl-6 ;
+}
+.rule-content ul ul ul{
+    @apply list-outside  pl-8 ;
+}
 #overview-of-design-competition-inherited-futures h4 {
     @apply text-3xl lg:text-4xl font-medium;
 }
