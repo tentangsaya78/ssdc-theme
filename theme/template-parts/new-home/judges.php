@@ -37,7 +37,7 @@ $i = 0;
                     alt="<?php echo esc_attr(wp_strip_all_tags($name)); ?>"
                     class="w-full aspect-square group-hover:opacity-30 duration-200"
                 />
-                <i class="bi bi-arrows-fullscreen text-white/70 text-3xl absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100"></i>
+                <i class="bi bi-arrows-fullscreen text-white/70 text-4xl absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100"></i>
                 <div class="p-6 h-full flex flex-col justify-between gap-6">
                     <div>
                         <h2 class="text-3xl lg:text-4xl mb-5"><?php echo wp_kses_post($name); ?></h2>
