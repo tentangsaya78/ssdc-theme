@@ -101,7 +101,7 @@ textarea.ssdc-input {
 }
 
 .rule-content ul {
-    @apply list-disc pl-4 ;
+    @apply list-disc flex flex-col gap-3 pl-4 ;
 }
 
 .rule-content ul ul{
@@ -110,6 +110,18 @@ textarea.ssdc-input {
 .rule-content ul ul ul{
     @apply list-outside  pl-8 ;
 }
+
+.rule-content table,
+.rule-content th{
+    @apply  border-gray-300;
+}
+.rule-content table tbody{
+    @apply table-auto overflow-x-auto border border-gray-300;
+}
+.rule-content td{
+    @apply p-2 border-b border-gray-300;
+}
+
 #overview-of-design-competition-inherited-futures h4 {
     @apply text-3xl lg:text-4xl font-medium;
 }
