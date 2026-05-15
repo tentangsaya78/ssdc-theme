@@ -108,7 +108,7 @@ textarea.ssdc-input {
     @apply list-disc  pl-6 ;
 }
 .rule-content ul ul ul{
-    @apply list-outside  pl-8 ;
+   list-style-type: circle;
 }
 
 .rule-content table,
@@ -120,6 +120,13 @@ textarea.ssdc-input {
 }
 .rule-content td{
     @apply p-2 border-b border-gray-300;
+}
+
+.rule-content a{
+    @apply underline text-primary font-medium hover:text-accent duration-200;
+}
+.rule-content .rule-footer a{
+    @apply no-underline text-primary font-normal hover:text-accent duration-200;
 }
 
 #overview-of-design-competition-inherited-futures h4 {
