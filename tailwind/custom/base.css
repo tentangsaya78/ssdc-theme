@@ -23,7 +23,7 @@ table {
 }
 
 .list-none{
-    @apply list-none;
+    @apply !list-none;
 }
 
 .home {
