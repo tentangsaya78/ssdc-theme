@@ -22,6 +22,10 @@ table {
     @apply overflow-x-auto;
 }
 
+.list-none{
+    @apply list-none;
+}
+
 .home {
     @apply bg-no-repeat bg-top-right;
     background-size: 90%;
@@ -89,7 +93,7 @@ textarea.ssdc-input {
 =====================================*/
 
 .rule-content a{
-    @apply underline text-primary font-medium hover:text-accent duration-200;
+    @apply underline text-primary hover:text-accent duration-200;
 }
 .rule-content .rule-footer a{
     @apply no-underline text-primary font-normal hover:text-accent duration-200;
