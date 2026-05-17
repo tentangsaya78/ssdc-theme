@@ -28,7 +28,7 @@ $i = 0;
             $color  = get_field('color');
             $id     = get_the_ID();
         ?>
-            <div class="flex flex-col <?php echo esc_attr($color); ?> group cursor-pointer relative "
+            <div class="judge-item flex flex-col <?php echo esc_attr($color); ?> group cursor-pointer relative "
                 x-data
                 @click="$dispatch('open-judge', { id: <?php echo $id; ?> })"
             >
