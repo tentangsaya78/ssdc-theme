@@ -45,9 +45,12 @@
   }
 
   .list-none, .list-none li  {
-    @apply !list-none;
+    list-style-type: none !important;
+  
  }
  
- 
+ ul{
+    @apply flex flex-col gap-3;
+ }
 
 }
