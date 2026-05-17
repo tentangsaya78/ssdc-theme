@@ -26,7 +26,7 @@
   }
   
   .rule-content li {
-    display: list-item !important; /* Memastikan elemen dikenali sebagai list item */
+    display: list-item ; /* Memastikan elemen dikenali sebagai list item */
   }
 
   /* Mengembalikan sifat alami list di dalam halaman edit admin (Gutenberg) */
