@@ -101,9 +101,7 @@ textarea.ssdc-input {
 .rule-content p{
     @apply mb-5;
 }
-#rule ul {
-    @apply list-disc flex flex-col gap-4 pl-2 lg:pl-6;
-}
+
 
 #rule table {
     @apply table-auto overflow-x-auto;
@@ -113,16 +111,7 @@ textarea.ssdc-input {
     @apply p-2;
 }
 
-.rule-content ul {
-    @apply list-disc flex flex-col gap-3 pl-4 ;
-}
 
-.rule-content ul ul{
-    @apply list-disc  pl-6 ;
-}
-.rule-content ul ul ul{
-   list-style-type: circle;
-}
 
 .rule-content table,
 .rule-content th{

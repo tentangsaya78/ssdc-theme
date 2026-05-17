@@ -51,7 +51,9 @@ $rules = new WP_Query($args);
             </div> -->
             <div class="lg:col-span-9 rule-content">
                 <?php while (have_posts()) : the_post(); ?>
-                    <?php the_content(); ?>
+  
+                        <?php the_content(); ?>
+
                 <?php endwhile;
 
                 if (is_singular('rule')): ?>
@@ -85,16 +87,8 @@ $rules = new WP_Query($args);
 get_footer();
 ?>
 <style>
-    .content p,
-    .content ul li,
-    .content ol li {
-        margin-bottom: 1rem;
-    }
-
     .rule-header {
         background-image: url('<?php echo get_template_directory_uri(); ?>/assets/grid-2.png');
         background-position: center;
     }
-
-    .rules-list {}
 </style>

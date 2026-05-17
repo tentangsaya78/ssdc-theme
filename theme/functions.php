@@ -287,7 +287,17 @@ function ssdc_remove_gutenberg_support()
 }
 add_action('init', 'ssdc_remove_gutenberg_support');
 
+// enable gutenberg di rule
 
+add_filter('use_block_editor_for_post_type', 'ssdc_enable_block_editor_for_post_type', 10, 2);
+
+function ssdc_enable_block_editor_for_post_type($can_edit, $post_type)
+{
+	if ($post_type === 'rule') {
+		return true;
+	}
+	return $can_edit;
+}
 
 
 // replace wordpress logo with custom logo on login page
