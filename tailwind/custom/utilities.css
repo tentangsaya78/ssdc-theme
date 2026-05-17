@@ -39,4 +39,8 @@
   .editor-styles-wrapper li {
     display: list-item !important;
   }
+
+  .list-decimal {
+    list-style-type: decimal !important;
+  }
 }
