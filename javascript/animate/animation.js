@@ -35,7 +35,7 @@ document.querySelectorAll(".judge-item").forEach((element, i) => {
             { opacity: [0, 1], y: [40, 0] },
             {
                 duration: 0.9,
-                delay: i * 0.2,          // stagger 100ms per item
+                delay: i * 0.4,          // stagger 100ms per item
                 easing: [0.22, 1, 0.36, 1],
             }
         );
