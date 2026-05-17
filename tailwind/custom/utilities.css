@@ -43,4 +43,11 @@
   .list-decimal {
     list-style-type: decimal !important;
   }
+
+  .list-none, .list-none li  {
+    @apply !list-none;
+ }
+ 
+ 
+
 }

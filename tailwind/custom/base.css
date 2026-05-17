@@ -22,9 +22,6 @@ table {
     @apply overflow-x-auto;
 }
 
-.list-none{
-    @apply !list-none;
-}
 
 .home {
     @apply bg-no-repeat bg-top-right;
