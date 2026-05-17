@@ -20,9 +20,9 @@
   /* Mengembalikan sifat alami list di halaman depan (frontend) */
   .rule-content ul, 
   .rule-content ol {
-    list-style-type: revert !important;
-    padding-left: 2rem !important; /* Memberi ruang agar bullet/number tidak terpotong ke kiri */
-    margin-bottom: 1rem !important;
+    list-style-type: revert ;
+    padding-left: 2rem ; /* Memberi ruang agar bullet/number tidak terpotong ke kiri */
+    margin-bottom: 1rem ;
   }
   
   .rule-content li {
@@ -32,20 +32,20 @@
   /* Mengembalikan sifat alami list di dalam halaman edit admin (Gutenberg) */
   .editor-styles-wrapper ul, 
   .editor-styles-wrapper ol {
-    list-style-type: revert !important;
-    padding-left: 2rem !important;
+    list-style-type: revert ;
+    padding-left: 2rem ;
   }
 
   .editor-styles-wrapper li {
-    display: list-item !important;
+    display: list-item ;
   }
 
   .list-decimal {
-    list-style-type: decimal !important;
+    list-style-type: decimal ;
   }
 
   .list-none, .list-none li  {
-    list-style-type: none !important;
+    list-style-type: none ;
   
  }
  
