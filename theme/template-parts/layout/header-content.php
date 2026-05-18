@@ -16,7 +16,7 @@ $menu = [
     "About"                   => "/#about",
     "Judges"                  => "/#judges",
     "Guideline & Rules"       => "/#rule",
-    "FAQ"                     => "/#frequently-asked-questions",
+    "FAQ"                     => "/rule/frequently-asked-questions/",
     "Registration & Submission" => "/register",
     "SketchUp Ecosystems"     => "/#ss",
 ];
