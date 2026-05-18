@@ -15,42 +15,95 @@
 .text-h5 { font-size: var(--text-h5); }
 .text-h6 { font-size: var(--text-h6); }
 
+/* ==========================================================================
+   1. STRUKTUR LIST OTOMATIS UNTUK WORDPRESS (GUTENBERG & FRONTEND)
+   ========================================================================== */
 
-@layer base {
-  /* Mengembalikan sifat alami list di halaman depan (frontend) */
-  .rule-content ul, 
-  .rule-content ol {
-    list-style-type: revert ;
-    padding-left: 2rem ; /* Memberi ruang agar bullet/number tidak terpotong ke kiri */
-    margin-bottom: 1rem ;
-  }
-  
-  .rule-content li {
-    display: list-item ; /* Memastikan elemen dikenali sebagai list item */
-  }
+/* Pengaturan Dasar: Memberi ruang/jarak agar list tidak keluar layar */
+.rule-content ul,
+.rule-content ol,
+.block-editor-block-list__block ul,
+.block-editor-block-list__block ol {
+    padding-left: 2rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+}
 
-  /* Mengembalikan sifat alami list di dalam halaman edit admin (Gutenberg) */
-  .editor-styles-wrapper ul, 
-  .editor-styles-wrapper ol {
-    list-style-type: revert ;
-    padding-left: 2rem ;
-  }
+.rule-content li,
+.block-editor-block-list__block li {
+    margin-bottom: 0.5rem !important;
+    padding-left: 0.25rem !important;
+}
 
-  .editor-styles-wrapper li {
-    display: list-item ;
-  }
+/* --- KONDISI OTOMATIS: UNORDERED LIST (UL) --- */
+/* Tingkat 1 (Luar): Bulatan Hitam */
+.rule-content ul, 
+.block-editor-block-list__block ul { 
+    list-style-type: disc !important; 
+}
+/* Tingkat 2 (Sarang): Lingkaran Kosong */
+.rule-content ul ul, 
+.block-editor-block-list__block ul ul { 
+    list-style-type: circle !important; 
+}
+/* Tingkat 3 (Sarang Dalam): Kotak */
+.rule-content ul ul ul, 
+.block-editor-block-list__block ul ul ul { 
+    list-style-type: square !important; 
+}
 
-  .list-decimal {
-    list-style-type: decimal ;
-  }
+/* --- KONDISI OTOMATIS: ORDERED LIST (OL) --- */
+/* Tingkat 1 (Luar): Angka Desimal (1, 2, 3) */
+.rule-content ol, 
+.block-editor-block-list__block ol { 
+    list-style-type: decimal !important; 
+}
+/* Tingkat 2 (Sarang): Huruf Kecil (a, b, c) */
+.rule-content ol ol, 
+.block-editor-block-list__block ol ol { 
+    list-style-type: lower-alpha !important; 
+}
+/* Tingkat 3 (Sarang Dalam): Romawi Kecil (i, ii, iii) */
+.rule-content ol ol ol, 
+.block-editor-block-list__block ol ol ol { 
+    list-style-type: lower-roman !important; 
+}
 
-  .list-none, .list-none li  {
-    list-style-type: none ;
-  
- }
- 
- ul{
-    @apply flex flex-col gap-3;
- }
 
+/* ==========================================================================
+   2. CLASS UTILITAS MANDIRI (BISA DIGUNAKAN MANUAL DI MANA SAJA)
+   ========================================================================== */
+
+/* Kelompok Simbol (Unordered) */
+.wp-list-disc          { list-style-type: disc !important; }
+.wp-list-circle        { list-style-type: circle !important; }
+.wp-list-square        { list-style-type: square !important; }
+
+/* Kelompok Angka & Romawi (Ordered) */
+.wp-list-decimal       { list-style-type: decimal !important; }
+.wp-list-decimal-zero  { list-style-type: decimal-leading-zero !important; }
+.wp-list-lower-roman   { list-style-type: lower-roman !important; }
+.wp-list-upper-roman   { list-style-type: upper-roman !important; }
+
+/* Kelompok Huruf/Abjad */
+.wp-list-lower-alpha   { list-style-type: lower-alpha !important; }
+.wp-list-upper-alpha   { list-style-type: upper-alpha !important; }
+.wp-list-lower-latin   { list-style-type: lower-latin !important; }
+.wp-list-upper-latin   { list-style-type: upper-latin !important; }
+
+/* Kelompok Bahasa & Budaya Spesifik (Opsional) */
+.wp-list-georgian      { list-style-type: georgian !important; }
+.wp-list-armenian      { list-style-type: armenian !important; }
+
+/* Kelompok Tanpa Gaya */
+.wp-list-none          { list-style-type: none !important; padding-left: 0 !important; }
+
+
+/* ==========================================================================
+   3. PERBAIKAN POSISI (LIST POSITION)
+   ========================================================================== */
+/* Memastikan penanda list berada di dalam area teks agar rapi saat teks panjang */
+.rule-content ul, 
+.rule-content ol {
+    list-style-position: inside !important;
 }
