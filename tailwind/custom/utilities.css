@@ -98,6 +98,14 @@
 /* Kelompok Tanpa Gaya */
 .wp-list-none          { list-style-type: none !important; padding-left: 0 !important; }
 
+/* Mengembalikan tipe bullet/angka bertingkat yang dihapus Tailwind */
+.rule-content ul, .block-editor-block-list__block ul { list-style-type: disc; }
+.rule-content ul ul, .block-editor-block-list__block ul ul { list-style-type: circle; }
+.rule-content ul ul ul, .block-editor-block-list__block ul ul ul { list-style-type: square; }
+
+.rule-content ol, .block-editor-block-list__block ol { list-style-type: decimal; }
+.rule-content ol ol, .block-editor-block-list__block ol ol { list-style-type: lower-alpha; }
+.rule-content ol ol ol, .block-editor-block-list__block ol ol ol { list-style-type: lower-roman; }
 
 /* ==========================================================================
    3. PERBAIKAN POSISI (LIST POSITION)

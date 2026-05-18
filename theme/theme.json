@@ -40,5 +40,27 @@
 			"contentSize": "40rem",
 			"wideSize": "60rem"
 		}
+	},
+	"styles": {
+		"blocks": {
+			"core/list": {
+				"spacing": {
+					"margin": {
+						"top": "1rem",
+						"bottom": "1rem"
+					},
+					"padding": {
+						"left": "2rem"
+					}
+				}
+			},
+			"core/list-item": {
+				"spacing": {
+					"margin": {
+						"bottom": "0.5rem"
+					}
+				}
+			}
+		}
 	}
 }

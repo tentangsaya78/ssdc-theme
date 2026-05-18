@@ -20,19 +20,42 @@
 import '@_tw/typography/block-editor-classes';
 
 wp.domReady(() => {
-	/**
-	 * Add support for Tailwind Typography’s `lead` class via a block style.
-	 */
-	wp.blocks.registerBlockStyle('core/paragraph', {
-		name: 'lead',
-		label: 'Lead',
-	});
+    /**
+     * Add support for Tailwind Typography’s `lead` class via a block style.
+     */
+    wp.blocks.registerBlockStyle('core/paragraph', {
+        name: 'lead',
+        label: 'Lead',
+    });
 
-	// Add additional block editor modifications here. For example, you could
-	// register another block style:
-	//
-	// wp.blocks.registerBlockStyle( 'core/quote', {
-	// 	name: 'fancy-quote',
-	// 	label: 'Fancy Quote',
-	// } );
+    /* ==========================================================================
+       PILIHAN GAYA LIST KUSTOM (GUTENBERG BLOCK STYLES)
+       ========================================================================== */
+
+    // 1. Gaya Unordered List (Simbol)
+    wp.blocks.registerBlockStyle('core/list', {
+        name: 'list-square',
+        label: 'Kotak (Square)',
+    });
+
+    wp.blocks.registerBlockStyle('core/list', {
+        name: 'list-circle',
+        label: 'Lingkaran (Circle)',
+    });
+
+    // 2. Gaya Ordered List (Angka & Huruf)
+    wp.blocks.registerBlockStyle('core/list', {
+        name: 'list-roman-upper',
+        label: 'Romawi Besar (I, II, III)',
+    });
+
+    wp.blocks.registerBlockStyle('core/list', {
+        name: 'list-alpha-upper',
+        label: 'Abjad Besar (A, B, C)',
+    });
+
+    wp.blocks.registerBlockStyle('core/list', {
+        name: 'list-decimal-zero',
+        label: 'Angka Nol Depan (01, 02)',
+    });
 });
