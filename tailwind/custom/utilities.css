@@ -115,3 +115,7 @@
 .rule-content ol {
     list-style-position: inside !important;
 }
+
+li img{
+  display: inline-block !important;
+}
