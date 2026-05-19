@@ -487,7 +487,7 @@ $steps = ['Institution', 'Head of Team', 'Members', 'Lecturer', 'Submission'];
                                 </span>
                                 <div>
                                     <p class="text-base font-semibold text-primary">Lecturer / Mentor</p>
-                                    <p class="text-xs text-secondary">Optional</p>
+                                    <p class="text-xs text-secondary">Must</p>
                                 </div>
                             </div>
                             <button type="button" @click="showLect = !showLect"

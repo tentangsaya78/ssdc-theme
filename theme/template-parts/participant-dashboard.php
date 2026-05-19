@@ -41,7 +41,7 @@ if ($has_data) {
 $important_dates = [
     ['date' => '27 April 2026',  'label' => 'Completion Announcement',    'done' => true],
     ['date' => '27 April- 27 May 2026',  'label' => 'Team Registration',      'done' => false],
-    ['date' => '7 May 2026',  'label' => 'Online Briefing (SketchUp Ecosystem + Judges Q&A)', 'done' => false],
+    ['date' => '19 May 2026',  'label' => 'Online Briefing (SketchUp Ecosystem + Judges Q&A)', 'done' => false],
     ['date' => '19 July 2026',  'label' => 'Submission Deadline ','done' => false],
     ['date' => '17 August 2026',  'label' => 'Announcement of 8 Shortlist', 'done' => false],
     ['date' => '17 September 2026',  'label' => 'Final Presentation', 'done' => false],
@@ -470,9 +470,9 @@ $important_dates = [
                             <?php
                             $links = [
                                 ['Edit Registration',  get_permalink(get_page_by_path('account')), 'bi-pencil'],
-                                ['Competition Rules',  home_url('/#rule'),                         'bi-book'],
-                                ['Judging Criteria',   home_url('/#judging'),                      'bi-star'],
-                                ['Contact Organizer',  'mailto:info@ssdc2026.com',                 'bi-envelope'],
+                                ['Competition Rules',  home_url('/rule/guidelines-and-rules'),'bi-book'],
+                                ['Judging Criteria',   home_url('/rule/judging-criteria'),'bi-star'],
+                                ['Contact Organizer',  'mailto:info@ssdc2026.com', 'bi-envelope'],
                             ];
                             foreach ($links as [$label, $href, $icon]) :
                             ?>
