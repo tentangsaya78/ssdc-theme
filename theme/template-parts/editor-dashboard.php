@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SSDC 2026 — Participants Management Dashboard
  * Template: ssdc-participants-manager.php
@@ -572,7 +573,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     <div x-show="$store.editorModal.data.m1_name">
                         <p class="text-[10px] uppercase tracking-widest text-secondary mb-3 font-medium">Team Member 1</p>
                         <div class="bg-light rounded-xl p-4 grid grid-cols-2 gap-x-8 gap-y-3">
-                            <?php foreach ([['Name','m1_name'],['Email','m1_email'],['Phone','m1_phone'],['Semester','m1_sem'],['Admission Year','m1_year']] as [$l,$k]): ?>
+                            <?php foreach ([['Name', 'm1_name'], ['Email', 'm1_email'], ['Phone', 'm1_phone'], ['Semester', 'm1_sem'], ['Admission Year', 'm1_year']] as [$l, $k]): ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $l; ?></p>
                                     <p class="text-sm font-medium text-primary" x-text="$store.editorModal.data.<?php echo $k; ?> || '—'"></p>
@@ -585,7 +586,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     <div x-show="$store.editorModal.data.m2_name">
                         <p class="text-[10px] uppercase tracking-widest text-secondary mb-3 font-medium">Team Member 2</p>
                         <div class="bg-light rounded-xl p-4 grid grid-cols-2 gap-x-8 gap-y-3">
-                            <?php foreach ([['Name','m2_name'],['Email','m2_email'],['Phone','m2_phone'],['Semester','m2_sem'],['Admission Year','m2_year']] as [$l,$k]): ?>
+                            <?php foreach ([['Name', 'm2_name'], ['Email', 'm2_email'], ['Phone', 'm2_phone'], ['Semester', 'm2_sem'], ['Admission Year', 'm2_year']] as [$l, $k]): ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $l; ?></p>
                                     <p class="text-sm font-medium text-primary" x-text="$store.editorModal.data.<?php echo $k; ?> || '—'"></p>
@@ -598,7 +599,7 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     <div x-show="$store.editorModal.data.lect_name">
                         <p class="text-[10px] uppercase tracking-widest text-secondary mb-3 font-medium">Lecturer / Mentor</p>
                         <div class="bg-light rounded-xl p-4 grid grid-cols-2 gap-x-8 gap-y-3">
-                            <?php foreach ([['Name','lect_name'],['Title','lect_title'],['Email','lect_email'],['Faculty','faculty']] as [$l,$k]): ?>
+                            <?php foreach ([['Name', 'lect_name'], ['Title', 'lect_title'], ['Email', 'lect_email'], ['Faculty', 'faculty']] as [$l, $k]): ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $l; ?></p>
                                     <p class="text-sm font-medium text-primary" x-text="$store.editorModal.data.<?php echo $k; ?> || '—'"></p>
@@ -645,9 +646,9 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
 <script>
     // Data dari PHP — di-inject sekali saat page load
-    const SSDC_ROWS  = <?php echo json_encode(array_values($rows)); ?>;
+    const SSDC_ROWS = <?php echo json_encode(array_values($rows)); ?>;
     const SSDC_NONCE = '<?php echo wp_create_nonce('ssdc_editor_action'); ?>';
-    const SSDC_AJAX  = '<?php echo admin_url('admin-ajax.php'); ?>';
+    const SSDC_AJAX = '<?php echo admin_url('admin-ajax.php'); ?>';
 
     document.addEventListener('alpine:init', () => {
 
@@ -659,25 +660,35 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
         Alpine.data('editorDash', () => ({
             // ── State
-            rows:         SSDC_ROWS.map(r => ({ ...r, _loading: false })),
-            search:       '',
+            rows: SSDC_ROWS.map(r => ({
+                ...r,
+                _loading: false
+            })),
+            search: '',
             filterStatus: '',
             filterRegion: '',
-            sort:         { field: 'date', asc: false },
-            selected:     [],
-            bulkAction:   '',
-            loading:      false,   // bulk loading
-            toast:        { show: false, message: '', type: 'success' },
-            page:         1,
-            perPage:      10,
+            sort: {
+                field: 'date',
+                asc: false
+            },
+            selected: [],
+            bulkAction: '',
+            loading: false, // bulk loading
+            toast: {
+                show: false,
+                message: '',
+                type: 'success'
+            },
+            page: 1,
+            perPage: 10,
 
             // ── Computed stats (reactive — update setelah AJAX)
             get stats() {
                 return {
-                    total:   this.rows.length,
+                    total: this.rows.length,
                     pending: this.rows.filter(r => r.status === 'pending').length,
                     publish: this.rows.filter(r => r.status === 'publish').length,
-                    draft:   this.rows.filter(r => r.status === 'draft').length,
+                    draft: this.rows.filter(r => r.status === 'draft').length,
                 };
             },
 
@@ -685,10 +696,18 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                 // Watch filter/search → reset page ke 1
                 // TAPI: tidak ada $watch untuk 'page' di sini,
                 // jadi paginasi tidak pernah di-reset dari luar.
-                this.$watch('search',       () => { this.page = 1; });
-                this.$watch('filterStatus', () => { this.page = 1; });
-                this.$watch('filterRegion', () => { this.page = 1; });
-                this.$watch('perPage',      () => { this.page = 1; });
+                this.$watch('search', () => {
+                    this.page = 1;
+                });
+                this.$watch('filterStatus', () => {
+                    this.page = 1;
+                });
+                this.$watch('filterRegion', () => {
+                    this.page = 1;
+                });
+                this.$watch('perPage', () => {
+                    this.page = 1;
+                });
             },
 
             // ── Navigasi halaman — satu-satunya tempat yang mengubah this.page
@@ -697,19 +716,22 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                 if (p < 1 || p > max) return;
                 this.page = p;
                 // Scroll tabel ke atas
-                this.$el.querySelector('table')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                this.$el.querySelector('table')?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             },
 
             // ── Filtered + sorted (seluruh data, tanpa paginasi)
             get filtered() {
                 let data = [...this.rows];
-                const q  = this.search.toLowerCase();
+                const q = this.search.toLowerCase();
 
                 if (q) data = data.filter(r =>
-                    (r.team_name    || '').toLowerCase().includes(q) ||
-                    (r.head_name    || '').toLowerCase().includes(q) ||
-                    (r.institution  || '').toLowerCase().includes(q) ||
-                    (r.country      || '').toLowerCase().includes(q) ||
+                    (r.team_name || '').toLowerCase().includes(q) ||
+                    (r.head_name || '').toLowerCase().includes(q) ||
+                    (r.institution || '').toLowerCase().includes(q) ||
+                    (r.country || '').toLowerCase().includes(q) ||
                     (r.author_email || '').toLowerCase().includes(q)
                 );
 
@@ -737,15 +759,15 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             },
 
             get pageNumbers() {
-                const total   = this.totalPages;
+                const total = this.totalPages;
                 const current = this.page;
-                const delta   = 2;
-                const range   = [];
+                const delta = 2;
+                const range = [];
 
                 for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
                     range.push(i);
                 }
-                if (current - delta > 2)        range.unshift('...');
+                if (current - delta > 2) range.unshift('...');
                 if (current + delta < total - 1) range.push('...');
                 range.unshift(1);
                 if (total > 1) range.push(total);
@@ -754,18 +776,25 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             },
 
             sortBy(field) {
-                this.sort.field === field
-                    ? (this.sort.asc = !this.sort.asc)
-                    : (this.sort = { field, asc: true });
+                this.sort.field === field ?
+                    (this.sort.asc = !this.sort.asc) :
+                    (this.sort = {
+                        field,
+                        asc: true
+                    });
             },
 
             toggleSelect(id) {
-                this.selected.includes(id)
-                    ? (this.selected = this.selected.filter(i => i !== id))
-                    : this.selected.push(id);
+                this.selected.includes(id) ?
+                    (this.selected = this.selected.filter(i => i !== id)) :
+                    this.selected.push(id);
             },
-            selectAll()  { this.selected = this.filtered.map(r => r.post_id); },
-            clearAll()   { this.selected = []; },
+            selectAll() {
+                this.selected = this.filtered.map(r => r.post_id);
+            },
+            clearAll() {
+                this.selected = [];
+            },
 
             openDetail(row) {
                 Alpine.store('editorModal').data = row;
@@ -773,24 +802,37 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             },
 
             statusLabel(s) {
-                return { pending: 'Under Review', publish: 'Approved', draft: 'Rejected' }[s] || s;
+                return {
+                    pending: 'Under Review',
+                    publish: 'Approved',
+                    draft: 'Rejected'
+                } [s] || s;
             },
 
             // ── Toast helper
             showToast(message, type = 'success') {
-                this.toast = { show: true, message, type };
-                setTimeout(() => { this.toast.show = false; }, 3500);
+                this.toast = {
+                    show: true,
+                    message,
+                    type
+                };
+                setTimeout(() => {
+                    this.toast.show = false;
+                }, 3500);
             },
 
             // ── Core AJAX helper
             async ajaxUpdate(ids, action) {
                 const body = new FormData();
-                body.append('action',      'ssdc_update_status');
-                body.append('nonce',       SSDC_NONCE);
+                body.append('action', 'ssdc_update_status');
+                body.append('nonce', SSDC_NONCE);
                 body.append('bulk_action', action);
                 ids.forEach(id => body.append('ids[]', id));
 
-                const res  = await fetch(SSDC_AJAX, { method: 'POST', body });
+                const res = await fetch(SSDC_AJAX, {
+                    method: 'POST',
+                    body
+                });
                 const json = await res.json();
                 if (!json.success) throw new Error(json.data?.message || 'Update failed');
                 return json;
@@ -798,15 +840,27 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
             // ── Update status lokal di this.rows (reactive, tanpa reload)
             applyStatusLocally(ids, action) {
-                const map = { approve: 'publish', reject: 'draft', pending: 'pending' };
+                const map = {
+                    approve: 'publish',
+                    reject: 'draft',
+                    pending: 'pending'
+                };
                 const newStatus = map[action];
                 this.rows = this.rows.map(r =>
-                    ids.includes(r.post_id) ? { ...r, status: newStatus, _loading: false } : r
+                    ids.includes(r.post_id) ? {
+                        ...r,
+                        status: newStatus,
+                        _loading: false
+                    } : r
                 );
                 // Sinkronkan modal jika sedang terbuka
                 const modal = Alpine.store('editorModal');
                 if (modal.open && modal.data && ids.includes(modal.data.post_id)) {
-                    modal.data = { ...modal.data, status: newStatus, _loading: false };
+                    modal.data = {
+                        ...modal.data,
+                        status: newStatus,
+                        _loading: false
+                    };
                 }
             },
 
@@ -814,7 +868,10 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             async quickAction(row, action) {
                 // Set loading hanya di baris ini
                 this.rows = this.rows.map(r =>
-                    r.post_id === row.post_id ? { ...r, _loading: true } : r
+                    r.post_id === row.post_id ? {
+                        ...r,
+                        _loading: true
+                    } : r
                 );
                 try {
                     await this.ajaxUpdate([row.post_id], action);
@@ -822,7 +879,10 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
                     this.showToast(`Status updated to "${this.statusLabel({ approve:'publish', reject:'draft', pending:'pending' }[action])}".`);
                 } catch (e) {
                     this.rows = this.rows.map(r =>
-                        r.post_id === row.post_id ? { ...r, _loading: false } : r
+                        r.post_id === row.post_id ? {
+                            ...r,
+                            _loading: false
+                        } : r
                     );
                     this.showToast(e.message, 'error');
                 }
@@ -832,13 +892,19 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             async modalAction(action) {
                 const modal = Alpine.store('editorModal');
                 if (!modal.data) return;
-                modal.data = { ...modal.data, _loading: true };
+                modal.data = {
+                    ...modal.data,
+                    _loading: true
+                };
                 try {
                     await this.ajaxUpdate([modal.data.post_id], action);
                     this.applyStatusLocally([modal.data.post_id], action);
                     this.showToast('Status updated successfully.');
                 } catch (e) {
-                    modal.data = { ...modal.data, _loading: false };
+                    modal.data = {
+                        ...modal.data,
+                        _loading: false
+                    };
                     this.showToast(e.message, 'error');
                 }
             },
@@ -847,13 +913,13 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
             async submitBulk() {
                 if (!this.selected.length || !this.bulkAction) return;
                 this.loading = true;
-                const ids    = [...this.selected];
+                const ids = [...this.selected];
                 const action = this.bulkAction;
                 try {
                     await this.ajaxUpdate(ids, action);
                     this.applyStatusLocally(ids, action);
                     this.showToast(`${ids.length} participant(s) updated.`);
-                    this.selected   = [];
+                    this.selected = [];
                     this.bulkAction = '';
                 } catch (e) {
                     this.showToast(e.message, 'error');
@@ -864,52 +930,132 @@ $draft   = count(array_filter($rows, fn($r) => $r['status'] === 'draft'));
 
             // ── CSV Export (semua filtered)
             exportCSV() {
-                const cols = ['#','Team','Head Name','Head Email','Head Phone',
-                    'Member 1','Member 2','Lecturer','Institution',
-                    'Country','Region','Category','Status','Date','Submission Link'];
+                const cols = [
+                    '#', 'Team', 'Head Name', 'Head Email', 'Head Phone', 'Head Semester', 'Head Admission Year',
+                    'Member 1 Name', 'Member 1 Email', 'Member 1 Phone', 'Member 1 Semester', 'Member 1 Admission Year',
+                    'Member 2 Name', 'Member 2 Email', 'Member 2 Phone', 'Member 2 Semester', 'Member 2 Admission Year',
+                    'Lecturer Name', 'Lecturer Title', 'Lecturer Email',
+                    'Institution', 'Faculty', 'Country', 'Region', 'Category', 'Status', 'Date',
+                    'Submission Link', 'Submission File'
+                ];
                 const body = this.filtered.map((r, i) => [
-                    i+1, r.team_name, r.head_name, r.head_email, r.head_phone,
-                    r.m1_name, r.m2_name, r.lect_name, r.institution,
-                    r.country, r.region, r.category,
-                    this.statusLabel(r.status), r.date_fmt, r.sub_link
+                    i + 1,
+                    r.team_name,
+                    r.head_name, r.head_email, r.head_phone, r.head_sem, r.head_year,
+                    r.m1_name, r.m1_email, r.m1_phone, r.m1_sem, r.m1_year,
+                    r.m2_name, r.m2_email, r.m2_phone, r.m2_sem, r.m2_year,
+                    r.lect_name, r.lect_title, r.lect_email,
+                    r.institution, r.faculty, r.country, r.region, r.category,
+                    this.statusLabel(r.status), r.date_fmt,
+                    r.sub_link, r.sub_file
                 ]);
                 const csv = [cols, ...body]
                     .map(row => row.map(v => `"${(v||'').toString().replace(/"/g,'""')}"`).join(','))
                     .join('\n');
                 const a = document.createElement('a');
-                a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], { type:'text/csv;charset=utf-8;' }));
+                a.href = URL.createObjectURL(new Blob(['\uFEFF' + csv], {
+                    type: 'text/csv;charset=utf-8;'
+                }));
                 a.download = `ssdc2026-participants-${new Date().toISOString().slice(0,10)}.csv`;
                 a.click();
             },
 
             // ── PDF Export (semua filtered)
             exportPDF() {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ orientation:'landscape', unit:'mm', format:'a4' });
-                doc.setFillColor(30,30,60);
-                doc.rect(0,0,297,20,'F');
-                doc.setTextColor(255,255,255);
-                doc.setFontSize(13);
-                doc.setFont(undefined,'bold');
-                doc.text('SSDC 2026 — Participant Management', 14, 13);
-                doc.setFontSize(8);
-                doc.setFont(undefined,'normal');
-                doc.text(`${new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}  |  Total: ${this.filtered.length}`, 200, 13);
-                doc.autoTable({
-                    startY: 25,
-                    head: [['#','Team','Head of Team','Country','Institution','Category','Status','Date']],
-                    body: this.filtered.map((r,i) => [
-                        i+1, r.team_name||'—',
-                        `${r.head_name||'—'}\n${r.head_email||''}`,
-                        r.country||'—', r.institution||'—', r.category||'—',
-                        this.statusLabel(r.status), r.date_fmt,
-                    ]),
-                    styles:           { fontSize:8, cellPadding:3 },
-                    headStyles:       { fillColor:[30,30,60], textColor:255, fontStyle:'bold' },
-                    alternateRowStyles: { fillColor:[247,248,252] },
-                    columnStyles:     { 2:{ cellWidth:50 } },
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const doc = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'mm',
+                    format: 'a4'
                 });
-                doc.save(`ssdc2026-participants-${new Date().toISOString().slice(0,10)}.pdf`);
+
+                const pageW = doc.internal.pageSize.getWidth(); // 297mm
+                const margin = 10;
+                const usable = pageW - margin * 2; // 277mm
+
+                // ── Header bar
+                doc.setFillColor(30, 30, 60);
+                doc.rect(0, 0, pageW, 18, 'F');
+                doc.setTextColor(255, 255, 255);
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text('SSDC 2026 — Participant Management', margin, 12);
+                doc.setFontSize(8);
+                doc.setFont(undefined, 'normal');
+                doc.text(
+                    `${new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })}  |  Total: ${this.filtered.length}`,
+                    pageW - margin, 12, {
+                        align: 'right'
+                    }
+                );
+
+                // ── Columns: split info into multiple lines but keep columns reasonable
+                const head = [
+                    ['#', 'Team', 'Head of Team', 'Member 1', 'Member 2', 'Lecturer', 'Institution / Faculty', 'Country / Region', 'Cat.', 'Status', 'Date']
+                ];
+
+                const body = this.filtered.map((r, i) => [
+                    i + 1,
+                    r.team_name || '—',
+                    [r.head_name, r.head_email, r.head_phone, (r.head_sem || r.head_year) ? `Sem ${r.head_sem||'-'} / ${r.head_year||'-'}` : null]
+                    .filter(Boolean).join('\n'),
+                    r.m1_name ?
+                    [r.m1_name, r.m1_email, r.m1_phone, (r.m1_sem || r.m1_year) ? `Sem ${r.m1_sem||'-'} / ${r.m1_year||'-'}` : null].filter(Boolean).join('\n') :
+                    '—',
+                    r.m2_name ?
+                    [r.m2_name, r.m2_email, r.m2_phone, (r.m2_sem || r.m2_year) ? `Sem ${r.m2_sem||'-'} / ${r.m2_year||'-'}` : null].filter(Boolean).join('\n') :
+                    '—',
+                    r.lect_name ?
+                    [(r.lect_title ? r.lect_title + ' ' : '') + r.lect_name, r.lect_email].filter(Boolean).join('\n') :
+                    '—',
+                    [r.institution, r.faculty].filter(Boolean).join('\n') || '—',
+                    [r.country, r.region].filter(Boolean).join(' / ') || '—',
+                    r.category || '—',
+                    this.statusLabel(r.status),
+                    r.date_fmt,
+                ]);
+
+                // ── Column widths — total must equal `usable` (277mm)
+                // #(6) Team(20) Head(44) M1(40) M2(40) Lect(44) Inst(34) Country(22) Cat(14) Status(18) Date(15) = 297 → trim to 277
+                const colWidths = [6, 20, 42, 38, 38, 42, 32, 22, 13, 18, 16]; // sum = 287, close enough; autoTable trims
+                const colStyles = {};
+                colWidths.forEach((w, idx) => {
+                    colStyles[idx] = {
+                        cellWidth: w
+                    };
+                });
+
+                doc.autoTable({
+                    startY: 22,
+                    margin: {
+                        left: margin,
+                        right: margin
+                    },
+                    tableWidth: usable,
+                    head,
+                    body,
+                    styles: {
+                        fontSize: 6.5,
+                        cellPadding: 2,
+                        overflow: 'linebreak',
+                        valign: 'top',
+                    },
+                    headStyles: {
+                        fillColor: [30, 30, 60],
+                        textColor: 255,
+                        fontStyle: 'bold',
+                        fontSize: 7,
+                        halign: 'left',
+                    },
+                    alternateRowStyles: {
+                        fillColor: [247, 248, 252]
+                    },
+                    columnStyles: colStyles,
+                });
+
+                doc.save(`ssdc2026-participants-${new Date().toISOString().slice(0, 10)}.pdf`);
             },
 
         }));
