@@ -15,11 +15,11 @@ import { animateHero } from './animate/hero';
 import { animation } from './animate/animation';
 
 
- 
+
 window.Alpine = Alpine
 
 
- 
+
 Alpine.start()
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,17 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
     animation();
 
     const elms = document.getElementById('splide-ecosystem');
-    
+
     if (elms) {
         const splide = new Splide(elms, {
-            type       : 'loop',
-            perPage    : 2,
-            fixedWidth : '900px',
-            autoplay   : true,
-            interval   : 3000,
-            pagination : false,
-            arrows     : false,
-            speed      : 1500,
+            type: 'loop',
+            perPage: 2,
+            fixedWidth: '900px',
+            autoplay: true,
+            interval: 3000,
+            pagination: false,
+            arrows: false,
+            speed: 1500,
             // Tambahkan breakpoints jika diperlukan untuk responsivitas
             breakpoints: {
                 1024: {
@@ -61,14 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const elms2 = document.getElementById('supported');
     if (elms2) {
         const splide2 = new Splide(elms2, {
-            type       : 'loop',
-            perPage    : 5,
-            autoplay   : true,
-            interval   : 3000,
-            pagination : false,
-            arrows     : true,
-            speed      : 1500,
-            focus      : 'center',
+            type: 'loop',
+            perPage: 5,
+            autoplay: true,
+            interval: 3000,
+            pagination: false,
+            arrows: true,
+            speed: 1500,
+            focus: 'center',
             // Tambahkan breakpoints jika diperlukan untuk responsivitas
             breakpoints: {
                 1024: {
@@ -78,4 +78,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }).mount();
     }
+
+    // tambahan splide
+    const videoSlider = new Splide('#video-slider', {
+        type: 'loop',
+        perPage: 2,
+        perMove: 1,
+        gap: '1.5rem',
+        pagination: true,
+        arrows: true,
+        autoplay: false,
+        breakpoints: {
+            768: { perPage: 1 },
+            1024: { perPage: 2 },
+        },
+    });
+
+    videoSlider.on('mounted', function () {
+    document.querySelectorAll('#video-slider [x-data]').forEach(function (el) {
+        Alpine.initTree(el);
+    });
+
+    document.querySelectorAll('#video-slider button').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            console.log('button clicked');
+            console.log('Alpine data:', btn.closest('[x-data]')?._x_dataStack);
+        });
+    });
 });
+
+    videoSlider.mount();
+    // end tambahan splide
+
+});
+
+

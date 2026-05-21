@@ -5,9 +5,11 @@ $video_thumbnail = get_field('video_thumbnail');
 $email = get_field('email', 'option');
 $instagram = get_field('instagram', 'option');
 $logo_footer = get_field('logo_footer', 'option');
+
+
 ?>
 <div x-data="{openContact: false}">
-    <section class="w-full pb-12 lg:pb-40">
+    <section class="w-full  ">
         <div class="relative font-inter antialiased">
             <div
                 class="relative flex flex-col justify-center bg-primary py-10 overflow-hidden">
@@ -104,23 +106,25 @@ $logo_footer = get_field('logo_footer', 'option');
                 </div>
             </div>
         </div>
-        <div class="container-full mt-9 flex flex-col lg:gap-3">
-            <p class="text-xl lg:text-3xl ">Check Us Out</p>
-            <div class="flex lg:flex-col lg:justify-start justify-center items-center"></div>
-            <a
-                href="<?php echo $instagram['url']; ?>" target="_blank"
-                class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200">
-                <i class="bi bi-instagram lg:text-3xl"></i>
-                <?php echo $instagram['title']; ?>
-            </a>
-            <button
-                @click="openContact = true"
-                class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200">
-                <i class="bi bi-envelope lg:text-3xl"></i>
-                <span>Please Send Message</span>
-            </button>
-        </div>
+       
     </section>
+       <!-- Contact -->
+    <div class="container-full flex flex-wrap justify-center gap-3 py-10">
+        <p class=" lg:text-3xl w-full text-center ">Check Us Out</p>
+        <div class=" flex lg:flex-col lg:justify-start justify-center items-center"></div>
+        <a
+            href="<?php echo $instagram['url']; ?>" target="_blank"
+            class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200">
+            <i class="bi bi-instagram lg:text-xl"></i>
+            <?php echo $instagram['title']; ?>
+        </a>
+        <button
+            @click="openContact = true"
+            class="flex items-center gap-2 lg:text-xl hover:text-accent duration-200  cursor-pointer">
+            <i class="bi bi-envelope lg:text-xl"></i>
+            <span>Please Send Message</span>
+        </button>
+    </div>
     <section x-show="openContact" class="bg-gray-100 py-20 px-6 fixed top-0 left-0 z-50 w-full h-full overflow-y-scroll flex justify-center items-center">
         <div class="max-w-md w-full mx-auto relative">
             <button @click="openContact = false" class="absolute top-4 right-4">

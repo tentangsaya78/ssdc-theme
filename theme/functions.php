@@ -395,3 +395,21 @@ function handle_contact_form() {
         wp_send_json_error('Failed to send message. Please try again later.');
     }
 }
+
+//tambahan===============
+
+/**
+ * Konversi URL YouTube / Vimeo ke embed URL dengan autoplay.
+ */
+function get_embed_url( string $url ): string {
+    // YouTube: youtube.com/watch?v=ID atau youtu.be/ID
+    if ( preg_match( '/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w\-]+)/', $url, $m ) ) {
+        return 'https://www.youtube.com/embed/' . $m[1] . '?autoplay=1&rel=0';
+    }
+    // Vimeo: vimeo.com/ID
+    if ( preg_match( '/vimeo\.com\/(\d+)/', $url, $m ) ) {
+        return 'https://player.vimeo.com/video/' . $m[1] . '?autoplay=1';
+    }
+    // Fallback
+    return esc_url( $url );
+}
