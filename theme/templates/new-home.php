@@ -7,7 +7,7 @@ $bg_image = get_template_directory_uri() . '/assets/bg-hero.svg';?>
 <?php
 get_template_part( 'template-parts/new-home/hero' );
 get_template_part( 'template-parts/new-home/about' );
-get_template_part( 'template-parts/home/video' );
+get_template_part( 'template-parts/new-home/video' );
 get_template_part( 'template-parts/new-home/judges' );
 get_template_part( 'template-parts/new-home/rules' );
 get_template_part( 'template-parts/new-home/cta' );
