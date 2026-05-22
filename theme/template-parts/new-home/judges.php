@@ -22,7 +22,7 @@ $i = 0;
         <?php if ($judges->have_posts()) : while ($judges->have_posts()) : $judges->the_post();
             $photo  = get_the_post_thumbnail_url(get_the_ID(), 'full');
             $name   = get_field('judge_name') ?: get_the_title();
-            $title  = get_field('description');
+            $description  = get_field('description');
             $from   = get_field('location');
             $profile = get_the_content();
             $color  = get_field('color');
@@ -41,7 +41,7 @@ $i = 0;
                 <div class="p-6 h-full flex flex-col justify-between gap-6">
                     <div>
                         <h2 class="text-3xl lg:text-4xl mb-5"><?php echo wp_kses_post($name); ?></h2>
-                        <p class=""><?php echo esc_html($title); ?></p>
+                        <p class=""><?php echo $description; ?></p>
                     </div>
                     <p class="text-sm lg:text-lg italic"><?php echo esc_html($from); ?></p>
                 </div>
