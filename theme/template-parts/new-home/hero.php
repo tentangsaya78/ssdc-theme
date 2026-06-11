@@ -44,7 +44,29 @@ $button = get_field('hero_button');
 
                                 <!--    button -->
                                 <div class="flex flex-wrap gap-6 max-h-max hero-button">
-                                    <a href="<?php echo esc_url('/register', 'ssdc') ?>" class="btn btn-primary">Register Now</a>
+                                    <div 
+    x-data="{
+        tooltipVisible: false,
+        tooltipText: 'Registration has closed',
+        tooltipArrow: true,
+        tooltipPosition: 'top',
+    }"
+    x-init="$refs.content.addEventListener('mouseenter', () => { tooltipVisible = true; }); $refs.content.addEventListener('mouseleave', () => { tooltipVisible = false; });"
+    class="relative">
+    
+    <div x-ref="tooltip" x-show="tooltipVisible" :class="{ 'top-0 left-1/2 -translate-x-1/2 -mt-0.5 -translate-y-full' : tooltipPosition == 'top', 'top-1/2 -translate-y-1/2 -ml-0.5 left-0 -translate-x-full' : tooltipPosition == 'left', 'bottom-0 left-1/2 -translate-x-1/2 -mb-0.5 translate-y-full' : tooltipPosition == 'bottom', 'top-1/2 -translate-y-1/2 -mr-0.5 right-0 translate-x-full' : tooltipPosition == 'right' }" class="absolute w-auto text-sm" x-cloak>
+        <div x-show="tooltipVisible" x-transition class="relative px-2 py-1 text-white rounded bg-primary/90">
+            <p x-text="tooltipText" class="block flex-shrink-0 text-xs whitespace-nowrap"></p>
+            <div x-ref="tooltipArrow" x-show="tooltipArrow" :class="{ 'bottom-0 -translate-x-1/2 left-1/2 w-2.5 translate-y-full' : tooltipPosition == 'top', 'right-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px translate-x-full' : tooltipPosition == 'left', 'top-0 -translate-x-1/2 left-1/2 w-2.5 -translate-y-full' : tooltipPosition == 'bottom', 'left-0 -translate-y-1/2 top-1/2 h-2.5 -mt-px -translate-x-full' : tooltipPosition == 'right' }" class="inline-flex overflow-hidden absolute justify-center items-center">
+                <div :class="{ 'origin-top-left -rotate-45' : tooltipPosition == 'top', 'origin-top-left rotate-45' : tooltipPosition == 'left', 'origin-bottom-left rotate-45' : tooltipPosition == 'bottom', 'origin-top-right -rotate-45' : tooltipPosition == 'right' }" class="w-1.5 h-1.5 transform bg-black/90"></div>
+            </div>
+        </div>
+    </div>
+    
+     <button x-ref="content"  class="btn btn-primary cursor-not-allowed opacity-40 "  >Register Now</button>
+
+</div>
+                                 
                                     <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
                                 </div>
 
