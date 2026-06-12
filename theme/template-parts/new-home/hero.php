@@ -40,7 +40,7 @@ $button = get_field('hero_button');
 
                                 <!--    button -->
                                 <div class="flex flex-wrap gap-6 max-h-max hero-button">
-        <!-- <div x-data="{
+         <div x-data="{
         tooltipVisible: false,
         tooltipText: 'Registration has closed',
         tooltipArrow: true,
@@ -67,9 +67,9 @@ $button = get_field('hero_button');
                                         <button x-ref="content"
                                             class="btn btn-primary cursor-not-allowed opacity-40 ">Register Now</button>
 
-                                    </div> -->
+                                    </div> 
 
-                                       <a href="/register" class="btn btn-primary">Register Now</a>
+                                   
                                     <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
                                 </div>
 
