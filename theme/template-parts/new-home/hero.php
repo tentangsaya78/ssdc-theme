@@ -70,9 +70,7 @@ $button = get_field('hero_button');
                                     </div> -->
 
                                        <a href="/register" class="btn btn-primary">Register Now</a>
-
-                                    <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact
-                                        Us</button>
+                                    <button @click="openContact = true" class="btn btn-outline cursor-pointer">Contact Us</button>
                                 </div>
 
                             </div>
