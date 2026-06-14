@@ -413,3 +413,10 @@ function get_embed_url( string $url ): string {
     // Fallback
     return esc_url( $url );
 }
+
+//disable register
+function my_custom_registration_redirect() {
+    // Ganti URL di bawah ini dengan halaman tujuan Anda
+    return home_url('/');
+}
+add_filter('registration_redirect', 'my_custom_registration_redirect');
