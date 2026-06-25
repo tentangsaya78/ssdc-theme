@@ -4,7 +4,7 @@
             SketchUp <br>
             Ecosystems
         </h2>
-        <div class="flex flex-col gap-2 mt-5 lg:text-xl">
+        <div class="flex flex-col gap-2 mt-5 lg:text-3xl">
              <a href="https://help.sketchup.com/en/predesign-sketchup" target="_blank" class="group flex gap-2 items-center">Predesign Information <i class="bi bi-arrow-right group-hover:translate-x-2 duration-200"></i></a>
               <a href="https://help.sketchup.com/en/sketchup-education/using-sketchup-higher-education-and-universities" target="_blank" class="group flex gap-2 items-center">Using SketchUp Studio for Higher Education
  <i class="bi bi-arrow-right group-hover:translate-x-2 duration-200"></i></a>
