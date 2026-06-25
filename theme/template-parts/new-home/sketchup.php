@@ -1,10 +1,10 @@
 <section id="ss" class="bg-primary text-white/70 pt-16 lg:pt-28">
     <div class="container-full pb-16 lg:pb-28">
-        <h2 class="section-title text-white/50 fade-up font-bold">
+        <h2 class="text-3xl lg:text-5xl text-white/50 fade-up font-bold">
             SketchUp <br>
             Ecosystems
         </h2>
-        <div class="flex flex-col gap-2 mt-5">
+        <div class="flex flex-col gap-2 mt-5 lg:text-xl">
              <a href="https://help.sketchup.com/en/predesign-sketchup" target="_blank" class="group flex gap-2 items-center">Predesign Information <i class="bi bi-arrow-right group-hover:translate-x-2 duration-200"></i></a>
               <a href="https://help.sketchup.com/en/sketchup-education/using-sketchup-higher-education-and-universities" target="_blank" class="group flex gap-2 items-center">Using SketchUp Studio for Higher Education
  <i class="bi bi-arrow-right group-hover:translate-x-2 duration-200"></i></a>
