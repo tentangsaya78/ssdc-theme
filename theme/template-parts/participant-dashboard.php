@@ -1,18 +1,35 @@
 <?php
+/*===============================
+*** ==========tambahan ==========***
+===============================*/
+
 $current_user = wp_get_current_user();
 $user_id      = $current_user->ID;
+$data         = ssdc_get_participant_submission($user_id);
+
+$post_id   = $data['post_id'];
+$is_edit   = $data['is_edit'];
+$is_locked = $data['is_locked'];
+$sub_link  = $data['sub_link'];
+$sub_file  = $data['sub_file'];
+$has_sub   = $data['has_sub'];
+
+/* =========end tambahan =========*/
+
+$current_user = wp_get_current_user();
+$user_id = $current_user->ID;
 
 // Ambil post participant milik user ini
 $existing = get_posts([
-    'post_type'   => 'participants',
-    'author'      => $user_id,
+    'post_type' => 'participants',
+    'author' => $user_id,
     'numberposts' => 1,
     'post_status' => ['publish', 'pending', 'draft'],
 ]);
 
-$post_id  = $existing ? $existing[0]->ID : null;
+$post_id = $existing ? $existing[0]->ID : null;
 $has_data = !is_null($post_id);
-$status   = $has_data ? get_post_status($post_id) : null;
+$status = $has_data ? get_post_status($post_id) : null;
 
 // Helper
 function pd_meta($post_id, $key)
@@ -22,30 +39,32 @@ function pd_meta($post_id, $key)
 
 // Timeline steps
 $timeline = [
-    ['key' => 'registered',  'label' => 'Registration',       'desc' => 'Account created',               'icon' => 'bi-person-check'],
-    ['key' => 'submitted',   'label' => 'Form Submitted',      'desc' => 'Team data submitted',           'icon' => 'bi-send-check'],
-    ['key' => 'reviewing',   'label' => 'Under Review',        'desc' => 'Panitia sedang mereview data',  'icon' => 'bi-hourglass-split'],
-    ['key' => 'approved',    'label' => 'Approved',            'desc' => 'Registration approved',         'icon' => 'bi-patch-check'],
-    ['key' => 'competing',   'label' => 'Competition Phase',   'desc' => 'Competition is underway',  'icon' => 'bi-trophy'],
+    ['key' => 'registered', 'label' => 'Registration', 'desc' => 'Account created', 'icon' => 'bi-person-check'],
+    ['key' => 'submitted', 'label' => 'Form Submitted', 'desc' => 'Team data submitted', 'icon' => 'bi-send-check'],
+    ['key' => 'reviewing', 'label' => 'Under Review', 'desc' => 'Panitia sedang mereview data', 'icon' => 'bi-hourglass-split'],
+    ['key' => 'approved', 'label' => 'Approved', 'desc' => 'Registration approved', 'icon' => 'bi-patch-check'],
+    ['key' => 'competing', 'label' => 'Competition Phase', 'desc' => 'Competition is underway', 'icon' => 'bi-trophy'],
 ];
 
 // Determine current step
 $current_step = 0;
 if ($has_data) {
     $current_step = 1; // submitted
-    if ($status === 'pending') $current_step = 2; // reviewing
-    if ($status === 'publish') $current_step = 3; // approved
+    if ($status === 'pending')
+        $current_step = 2; // reviewing
+    if ($status === 'publish')
+        $current_step = 3; // approved
 }
 
 // Important dates (bisa dari ACF options page)
 $important_dates = [
-    ['date' => '27 April 2026',  'label' => 'Completion Announcement',    'done' => true],
-    ['date' => '27 April- 27 May 2026',  'label' => 'Team Registration',      'done' => false],
-    ['date' => '19 May 2026',  'label' => 'Online Briefing (SketchUp Ecosystem + Judges Q&A)', 'done' => false],
-    ['date' => '19 July 2026',  'label' => 'Submission Deadline ','done' => false],
-    ['date' => '17 August 2026',  'label' => 'Announcement of 8 Shortlist', 'done' => false],
-    ['date' => '17 September 2026',  'label' => 'Final Presentation', 'done' => false],
-    ['date' => '17 September 2026',  'label' => 'Winner Announcement', 'done' => false],
+    ['date' => '27 April 2026', 'label' => 'Completion Announcement', 'done' => true],
+    ['date' => '27 April- 27 May 2026', 'label' => 'Team Registration', 'done' => false],
+    ['date' => '19 May 2026', 'label' => 'Online Briefing (SketchUp Ecosystem + Judges Q&A)', 'done' => false],
+    ['date' => '19 July 2026', 'label' => 'Submission Deadline ', 'done' => false],
+    ['date' => '17 August 2026', 'label' => 'Announcement of 8 Shortlist', 'done' => false],
+    ['date' => '17 September 2026', 'label' => 'Final Presentation', 'done' => false],
+    ['date' => '17 September 2026', 'label' => 'Winner Announcement', 'done' => false],
 ];
 ?>
 
@@ -54,21 +73,23 @@ $important_dates = [
     <!-- ── Topbar ── -->
     <div class="bg-white px-6 py-4 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <?php if (has_custom_logo()) the_custom_logo(); ?>
+            <?php if (has_custom_logo())
+                the_custom_logo(); ?>
             <div>
                 <p class="text-[10px] uppercase tracking-widest opacity-50">SSDC 2026</p>
                 <h1 class="text-base font-semibold">Participant Dashboard</h1>
             </div>
         </div>
-       
+
 
         <div class="flex items-center gap-3">
             <div class="flex gap-2 items-center">
                 <i class="bi bi-person-circle"></i>
-  <span class="text-sm opacity-60 hidden md:block"><?php echo esc_html($current_user->display_name); ?></span>
+                <span
+                    class="text-sm opacity-60 hidden md:block"><?php echo esc_html($current_user->display_name); ?></span>
             </div>
-          
-            <?php if ($has_data) : ?>
+
+            <?php if ($has_data): ?>
                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                     class="text-xs border border-white/20 px-3 py-1.5 rounded-full hover:bg-white/10 transition flex items-center gap-1.5">
                     <i class="bi bi-pencil"></i> Edit Form
@@ -76,37 +97,41 @@ $important_dates = [
             <?php endif; ?>
             <a href="<?php echo wp_logout_url(home_url()); ?>"
                 class="text-xs border border-white/20 px-3 py-1.5 rounded-full hover:bg-white/10 transition">
-                  <i class="bi bi-box-arrow-right"></i>
+                <i class="bi bi-box-arrow-right"></i>
                 Logout
             </a>
 
-             <div class="  rounded-full pl-3 bg-white border border-secondary/20 flex gap-2 items-center">
-            <i class="bi bi-translate text-primary"></i> <span class="p-2 rounded-full bg-primary text-white text-sm"> <?php echo do_shortcode('[gtranslate]'); ?></span>
-        </div>
+            <div class="  rounded-full pl-3 bg-white border border-secondary/20 flex gap-2 items-center">
+                <i class="bi bi-translate text-primary"></i> <span
+                    class="p-2 rounded-full bg-primary text-white text-sm">
+                    <?php echo do_shortcode('[gtranslate]'); ?></span>
+            </div>
         </div>
     </div>
 
     <div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
 
-        <?php if (!$has_data) : ?>
+        <?php if (!$has_data): ?>
             <!-- ══ NO SUBMISSION STATE ══ -->
             <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm p-12 text-center">
                 <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
                     <i class="bi bi-clipboard-x text-3xl text-secondary/40"></i>
                 </div>
                 <h2 class="text-xl font-semibold text-primary mb-2">No registration yet</h2>
-                <p class="text-secondary text-sm mb-6">You haven't filled out the team registration form yet.<br>Register your team immediately before the deadline!</p>
+                <p class="text-secondary text-sm mb-6">You haven't filled out the team registration form yet.<br>Register
+                    your team immediately before the deadline!</p>
                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                     class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full text-sm font-medium hover:bg-primary/80 transition">
                     <i class="bi bi-pencil-square"></i> Fill in the Registration Form
                 </a>
             </div>
 
-        <?php else : ?>
+        <?php else: ?>
 
             <!-- ══ GREETING BANNER ══ -->
             <div class="bg-primary rounded-2xl p-6 text-white relative overflow-hidden">
-                <div class="absolute right-0 top-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="absolute right-0 top-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2">
+                </div>
                 <div class="absolute right-10 bottom-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2"></div>
                 <div class="relative z-10">
                     <p class="text-xs uppercase tracking-widest opacity-60 mb-1">Welcome back</p>
@@ -121,9 +146,9 @@ $important_dates = [
                     <?php
                     $pill = match ($status) {
                         'pending' => ['Under Review', 'bg-accent text-white'],
-                        'publish' => ['Approved ✓',   'bg-green-400 text-white'],
-                        'draft'   => ['Rejected',      'bg-red-400 text-white'],
-                        default   => ['Unknown',        'bg-secondary/30 text-white'],
+                        'publish' => ['Approved ✓', 'bg-green-400 text-white'],
+                        'draft' => ['Rejected', 'bg-red-400 text-white'],
+                        default => ['Unknown', 'bg-secondary/30 text-white'],
                     };
                     ?>
                     <span class="text-xs font-semibold px-4 py-1.5 rounded-full <?php echo $pill[1]; ?>">
@@ -150,16 +175,16 @@ $important_dates = [
                         <div class="p-6 grid grid-cols-2 gap-x-8 gap-y-4">
                             <?php
                             $team_fields = [
-                                ['Team Name',    'team_name'],
-                                ['Institution',  'institution_name'],
-                                ['Faculty',      'faculty'],
-                                ['Country',      'country'],
-                                ['Region',       'region'],
-                                ['Category',     'category'],
+                                ['Team Name', 'team_name'],
+                                ['Institution', 'institution_name'],
+                                ['Faculty', 'faculty'],
+                                ['Country', 'country'],
+                                ['Region', 'region'],
+                                ['Category', 'category'],
                             ];
-                            foreach ($team_fields as [$label, $key]) :
+                            foreach ($team_fields as [$label, $key]):
                                 $val = pd_meta($post_id, $key);
-                            ?>
+                                ?>
                                 <div>
                                     <p class="text-xs text-secondary"><?php echo $label; ?></p>
                                     <p class="text-sm font-medium text-primary"><?php echo $val ?: '—'; ?></p>
@@ -177,25 +202,42 @@ $important_dates = [
 
                             <?php
                             $members = [
-                                ['Head of Team', [
-                                    ['head_name',     'head_email',    'head_phone'],
-                                    ['head_semester', 'head_year'],
-                                ], 'bg-primary text-white', '1'],
-                                ['Team Member 1', [
-                                    ['m1_name', 'm1_email', 'm1_phone'],
-                                    ['m1_semester', 'm1_year'],
-                                ], 'bg-secondary/20 text-secondary', '2'],
-                                ['Team Member 2', [
-                                    ['m2_name', 'm2_email', 'm2_phone'],
-                                    ['m2_semester', 'm2_year'],
-                                ], 'bg-secondary/20 text-secondary', '3'],
+                                [
+                                    'Head of Team',
+                                    [
+                                        ['head_name', 'head_email', 'head_phone'],
+                                        ['head_semester', 'head_year'],
+                                    ],
+                                    'bg-primary text-white',
+                                    '1'
+                                ],
+                                [
+                                    'Team Member 1',
+                                    [
+                                        ['m1_name', 'm1_email', 'm1_phone'],
+                                        ['m1_semester', 'm1_year'],
+                                    ],
+                                    'bg-secondary/20 text-secondary',
+                                    '2'
+                                ],
+                                [
+                                    'Team Member 2',
+                                    [
+                                        ['m2_name', 'm2_email', 'm2_phone'],
+                                        ['m2_semester', 'm2_year'],
+                                    ],
+                                    'bg-secondary/20 text-secondary',
+                                    '3'
+                                ],
                             ];
-                            foreach ($members as [$title, $fields, $badge_cls, $num]) :
+                            foreach ($members as [$title, $fields, $badge_cls, $num]):
                                 $name = pd_meta($post_id, $fields[0][0]);
-                                if (!$name && $num !== '1') continue;
-                            ?>
+                                if (!$name && $num !== '1')
+                                    continue;
+                                ?>
                                 <div class="px-6 py-4 flex items-start gap-4">
-                                    <span class="w-7 h-7 rounded-full <?php echo $badge_cls; ?> text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                    <span
+                                        class="w-7 h-7 rounded-full <?php echo $badge_cls; ?> text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                                         <?php echo $num; ?>
                                     </span>
                                     <div class="flex-1 grid grid-cols-2 gap-x-8 gap-y-2">
@@ -205,19 +247,23 @@ $important_dates = [
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Email</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[0][1]) ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, $fields[0][1]) ?: '—'; ?></p>
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Phone</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[0][2]) ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, $fields[0][2]) ?: '—'; ?></p>
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Semester</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[1][0]) ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, $fields[1][0]) ?: '—'; ?></p>
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Admission Year</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, $fields[1][1]) ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, $fields[1][1]) ?: '—'; ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -225,9 +271,10 @@ $important_dates = [
 
                             <!-- Lecturer -->
                             <?php $lect = pd_meta($post_id, 'lect_name');
-                            if ($lect) : ?>
+                            if ($lect): ?>
                                 <div class="px-6 py-4 flex items-start gap-4">
-                                    <span class="w-7 h-7 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5">
+                                    <span
+                                        class="w-7 h-7 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5">
                                         <i class="bi bi-person-workspace text-xs"></i>
                                     </span>
                                     <div class="flex-1 grid grid-cols-2 gap-x-8 gap-y-2">
@@ -237,11 +284,13 @@ $important_dates = [
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Title</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, 'lect_title') ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, 'lect_title') ?: '—'; ?></p>
                                         </div>
                                         <div>
                                             <p class="text-xs text-secondary">Email</p>
-                                            <p class="text-sm text-primary"><?php echo pd_meta($post_id, 'lect_email') ?: '—'; ?></p>
+                                            <p class="text-sm text-primary">
+                                                <?php echo pd_meta($post_id, 'lect_email') ?: '—'; ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -250,15 +299,15 @@ $important_dates = [
                     </div>
 
                     <!-- Submission Card -->
-                  <!-- Submission Card -->
+                    <!-- Submission Card -->
                     <?php
                     $submission_open_date = new DateTime('2026-05-21 00:00:00', new DateTimeZone('Asia/Jakarta')); // 21 May 2026 - 00:00:00', new DateTimeZone('Asia/Jakarta'));
-                    $now                  = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
-                    $submission_locked    = $now < $submission_open_date;
+                    $now = new DateTime('now', new DateTimeZone('Asia/Jakarta'));
+                    $submission_locked = $now < $submission_open_date;
 
                     $sub_link = get_post_meta($post_id, 'submission_link', true);
                     $sub_file = get_post_meta($post_id, 'submission_file_url', true);
-                    $has_sub  = $sub_link || $sub_file;
+                    $has_sub = $sub_link || $sub_file;
                     ?>
                     <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden">
 
@@ -266,23 +315,26 @@ $important_dates = [
                         <div class="px-6 py-4 border-b border-secondary/5 flex items-center justify-between">
                             <p class="text-xs uppercase tracking-widest text-secondary font-medium">Submission</p>
 
-                            <?php if ($submission_locked) : ?>
-                                <span class="text-xs px-2.5 py-1 rounded-full font-medium bg-secondary/10 text-secondary flex items-center gap-1.5">
+                            <?php if ($submission_locked): ?>
+                                <span
+                                    class="text-xs px-2.5 py-1 rounded-full font-medium bg-secondary/10 text-secondary flex items-center gap-1.5">
                                     <i class="bi bi-lock-fill text-[10px]"></i> Locked
                                 </span>
-                            <?php else : ?>
-                                <span class="text-xs px-2.5 py-1 rounded-full font-medium <?php echo $has_sub ? 'bg-green-100 text-green-600' : 'bg-red-50 text-red-400'; ?>">
+                            <?php else: ?>
+                                <span
+                                    class="text-xs px-2.5 py-1 rounded-full font-medium <?php echo $has_sub ? 'bg-green-100 text-green-600' : 'bg-red-50 text-red-400'; ?>">
                                     <?php echo $has_sub ? '✓ Submitted' : '✗ Not Submitted'; ?>
                                 </span>
                             <?php endif; ?>
                         </div>
 
-                        <?php if ($submission_locked) : ?>
+                        <?php if ($submission_locked): ?>
 
                             <!-- LOCKED STATE -->
                             <div class="p-6 text-center">
 
-                                <div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3">
+                                <div
+                                    class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3">
                                     <i class="bi bi-lock text-2xl text-secondary/40"></i>
                                 </div>
 
@@ -290,48 +342,116 @@ $important_dates = [
                                 <p class="text-xs text-secondary mb-5 leading-relaxed">
                                     Submission will open on <strong class="text-primary">21 May 2026</strong>.<br>
                                     Please prepare your files before the deadline.
-                                </p>                              
+                                </p>
 
                             </div>
 
-                        <?php else : ?>
+                        <?php else: ?>
 
                             <!-- OPEN STATE -->
-                            <div class="p-6 space-y-4">
+                          <div class="p-6 space-y-4">
 
-                                <?php if ($sub_link) : ?>
-                                    <div>
-                                        <p class="text-xs text-secondary mb-1">Submission Link</p>
-                                        <a href="<?php echo esc_url($sub_link); ?>" target="_blank"
-                                            class="text-sm text-primary hover:underline flex items-center gap-1.5 break-all">
-                                            <i class="bi bi-link-45deg shrink-0"></i>
-                                            <?php echo esc_html($sub_link); ?>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+    <?php if (isset($_GET['submitted'])) : ?>
+        <div class="bg-green-50 text-green-600 text-sm p-3 rounded-lg">
+            Submission berhasil dikirim dan sedang menunggu review.
+        </div>
+    <?php elseif (isset($_GET['sub_error'])) :
+        $error_messages = [
+            'locked'        => 'Submission sudah disetujui dan tidak bisa diubah.',
+            'empty'         => 'Silakan isi link eksternal atau upload file.',
+            'invalid_url'   => 'Format link tidak valid.',
+            'invalid_type'  => 'Tipe file tidak diizinkan.',
+            'upload_failed' => 'Gagal mengupload file.',
+            'save_failed'   => 'Gagal menyimpan data submission.',
+        ];
+        $msg = $error_messages[$_GET['sub_error']] ?? 'Terjadi kesalahan.';
+    ?>
+        <div class="bg-red-50 text-red-600 text-sm p-3 rounded-lg"><?php echo esc_html($msg); ?></div>
+    <?php endif; ?>
 
-                                <?php if ($sub_file) : ?>
-                                    <div>
-                                        <p class="text-xs text-secondary mb-1">Uploaded File</p>
-                                        <a href="<?php echo esc_url($sub_file); ?>" target="_blank"
-                                            class="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-2.5 rounded-full hover:bg-primary/20 transition">
-                                            <i class="bi bi-file-earmark-arrow-down"></i>
-                                            <?php echo esc_html(basename($sub_file)); ?>
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+    <?php if ($sub_link) : ?>
+        <div>
+            <p class="text-xs text-secondary mb-1">Submission Link</p>
+            <a href="<?php echo esc_url($sub_link); ?>" target="_blank"
+                class="text-sm text-primary hover:underline flex items-center gap-1.5 break-all">
+                <i class="bi bi-link-45deg shrink-0"></i>
+                <?php echo esc_html($sub_link); ?>
+            </a>
+        </div>
+    <?php endif; ?>
 
-                                <?php if (!$has_sub) : ?>
-                                    <div class="text-center py-4">
-                                        <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
-                                        <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
-                                            class="inline-flex items-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
-                                            <i class="bi bi-upload"></i> Upload Submission
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+    <?php if ($sub_file) : ?>
+        <div>
+            <p class="text-xs text-secondary mb-1">Uploaded File</p>
+            <a href="<?php echo esc_url($sub_file); ?>" target="_blank"
+                class="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-2.5 rounded-full hover:bg-primary/20 transition">
+                <i class="bi bi-file-earmark-arrow-down"></i>
+                <?php echo esc_html(basename($sub_file)); ?>
+            </a>
+        </div>
+    <?php endif; ?>
 
-                            </div>
+    <?php if (!$has_sub) : ?>
+        <div class="text-center py-4">
+            <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
+            <button type="button" onclick="document.getElementById('ssdc-upload-modal').classList.remove('hidden')"
+                class="inline-flex items-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
+                <i class="bi bi-upload"></i> Upload Submission
+            </button>
+        </div>
+    <?php elseif (!$is_locked) : ?>
+        <div class="text-right">
+            <button type="button" onclick="document.getElementById('ssdc-upload-modal').classList.remove('hidden')"
+                class="inline-flex items-center gap-2 bg-accent/10 text-accent text-sm px-4 py-2 rounded-full hover:bg-accent/20 transition">
+                <i class="bi bi-pencil"></i> Update Submission
+            </button>
+        </div>
+    <?php endif; ?>
+
+</div>
+
+<?php if (!$is_locked) : ?>
+<!-- Modal Upload -->
+<div id="ssdc-upload-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 w-full max-w-md mx-4 relative">
+        <button type="button" onclick="document.getElementById('ssdc-upload-modal').classList.add('hidden')"
+            class="absolute top-3 right-3 text-secondary hover:text-primary">
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+        <h3 class="text-lg font-semibold mb-4"><?php echo $has_sub ? 'Update Submission' : 'Upload Submission'; ?></h3>
+
+        <form method="post" enctype="multipart/form-data"
+            action="<?php echo esc_url(admin_url('admin-post.php')); ?>" class="space-y-3">
+
+            <input type="hidden" name="action" value="ssdc_submit_participant">
+            <input type="hidden" name="redirect_to" value="<?php echo esc_url(get_permalink()); ?>">
+            <?php wp_nonce_field('submit_participant_action', 'submission_nonce'); ?>
+
+            <div>
+                <label class="text-xs text-secondary mb-1 block">Link Eksternal (opsional)</label>
+                <input type="url" name="submission_link"
+                    value="<?php echo esc_attr($sub_link); ?>"
+                    placeholder="https://..."
+                    class="w-full text-sm border border-primary/20 rounded-lg px-3 py-2 focus:outline-none focus:ring-1 focus:ring-accent">
+            </div>
+
+            <div>
+                <label class="text-xs text-secondary mb-1 block">Upload File (opsional, maks 10MB)</label>
+                <input type="file" name="submission_file"
+                    accept=".pdf,.doc,.docx,.zip,.rar,.jpg,.jpeg,.png"
+                    class="w-full text-sm border border-primary/20 rounded-lg px-3 py-2">
+            </div>
+
+            <button type="submit"
+                class="w-full inline-flex items-center justify-center gap-2 bg-accent text-white text-sm px-5 py-2.5 rounded-full hover:bg-accent/80 transition">
+                <i class="bi bi-upload"></i> Kirim
+            </button>
+        </form>
+    </div>
+</div>
+<?php endif; ?>
+<!--end tambahan--->
 
                         <?php endif; // submission_locked ?>
 
@@ -352,42 +472,45 @@ $important_dates = [
                             <?php
                             $status_info = match ($status) {
                                 'pending' => [
-                                    'icon'  => 'bi-hourglass-split',
+                                    'icon' => 'bi-hourglass-split',
                                     'color' => 'text-accent',
-                                    'bg'    => 'bg-accent/10',
+                                    'bg' => 'bg-accent/10',
                                     'label' => 'Under Review',
-                                    'desc'  => 'Your team data is being reviewed by the committee. We will let you know soon.',
+                                    'desc' => 'Your team data is being reviewed by the committee. We will let you know soon.',
                                 ],
                                 'publish' => [
-                                    'icon'  => 'bi-patch-check-fill',
+                                    'icon' => 'bi-patch-check-fill',
                                     'color' => 'text-green-600',
-                                    'bg'    => 'bg-green-50',
+                                    'bg' => 'bg-green-50',
                                     'label' => 'Approved!',
-                                    'desc'  => 'Happy! Your team registration has been approved. Make sure the submission is ready before the deadline.',
+                                    'desc' => 'Happy! Your team registration has been approved. Make sure the submission is ready before the deadline.',
                                 ],
                                 'draft' => [
-                                    'icon'  => 'bi-x-circle',
+                                    'icon' => 'bi-x-circle',
                                     'color' => 'text-red-500',
-                                    'bg'    => 'bg-red-50',
+                                    'bg' => 'bg-red-50',
                                     'label' => 'Needs Revision',
-                                    'desc'  => 'Your registration data requires revision. Please update and resubmit.',
+                                    'desc' => 'Your registration data requires revision. Please update and resubmit.',
                                 ],
                                 default => [
-                                    'icon'  => 'bi-question-circle',
+                                    'icon' => 'bi-question-circle',
                                     'color' => 'text-secondary',
-                                    'bg'    => 'bg-secondary/10',
+                                    'bg' => 'bg-secondary/10',
                                     'label' => 'Unknown',
-                                    'desc'  => '',
+                                    'desc' => '',
                                 ],
                             };
                             ?>
                             <div class="<?php echo $status_info['bg']; ?> rounded-xl p-4 text-center mb-4">
-                                <i class="bi <?php echo $status_info['icon']; ?> text-3xl <?php echo $status_info['color']; ?> block mb-2"></i>
-                                <p class="font-semibold <?php echo $status_info['color']; ?> text-base"><?php echo $status_info['label']; ?></p>
-                                <p class="text-xs text-secondary mt-1 leading-relaxed"><?php echo $status_info['desc']; ?></p>
+                                <i
+                                    class="bi <?php echo $status_info['icon']; ?> text-3xl <?php echo $status_info['color']; ?> block mb-2"></i>
+                                <p class="font-semibold <?php echo $status_info['color']; ?> text-base">
+                                    <?php echo $status_info['label']; ?></p>
+                                <p class="text-xs text-secondary mt-1 leading-relaxed"><?php echo $status_info['desc']; ?>
+                                </p>
                             </div>
 
-                            <?php if ($status === 'draft') : ?>
+                            <?php if ($status === 'draft'): ?>
                                 <a href="<?php echo get_permalink(get_page_by_path('account')); ?>"
                                     class="w-full flex items-center justify-center gap-2 bg-primary text-white py-2.5 rounded-full text-sm font-medium hover:bg-primary/80 transition">
                                     <i class="bi bi-pencil"></i> Perbarui Data
@@ -407,10 +530,10 @@ $important_dates = [
                                 <div class="absolute left-3.5 top-4 bottom-4 w-px bg-secondary/10"></div>
 
                                 <div class="space-y-5">
-                                    <?php foreach ($timeline as $i => $step) :
-                                        $done    = $i <= $current_step;
+                                    <?php foreach ($timeline as $i => $step):
+                                        $done = $i <= $current_step;
                                         $current = $i === $current_step;
-                                    ?>
+                                        ?>
                                         <div class="flex items-start gap-4 relative">
                                             <!-- Dot -->
                                             <div class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center z-10
@@ -421,13 +544,16 @@ $important_dates = [
                                             </div>
                                             <!-- Label -->
                                             <div class="pt-0.5">
-                                                <p class="text-sm font-medium <?php echo $done ? 'text-primary' : 'text-secondary/40'; ?>">
+                                                <p
+                                                    class="text-sm font-medium <?php echo $done ? 'text-primary' : 'text-secondary/40'; ?>">
                                                     <?php echo $step['label']; ?>
-                                                    <?php if ($current) : ?>
-                                                        <span class="ml-1.5 text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">Now</span>
+                                                    <?php if ($current): ?>
+                                                        <span
+                                                            class="ml-1.5 text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-semibold">Now</span>
                                                     <?php endif; ?>
                                                 </p>
-                                                <p class="text-xs <?php echo $done ? 'text-secondary' : 'text-secondary/30'; ?>">
+                                                <p
+                                                    class="text-xs <?php echo $done ? 'text-secondary' : 'text-secondary/30'; ?>">
                                                     <?php echo $step['desc']; ?>
                                                 </p>
                                             </div>
@@ -444,16 +570,19 @@ $important_dates = [
                             <p class="text-xs uppercase tracking-widest text-secondary font-medium">Important Dates</p>
                         </div>
                         <div class="divide-y divide-secondary/5">
-                            <?php foreach ($important_dates as $d) : ?>
+                            <?php foreach ($important_dates as $d): ?>
                                 <div class="px-5 py-3 flex items-center gap-3">
-                                    <div class="w-1.5 h-1.5 rounded-full shrink-0 <?php echo $d['done'] ? 'bg-green-400' : 'bg-secondary/20'; ?>"></div>
+                                    <div
+                                        class="w-1.5 h-1.5 rounded-full shrink-0 <?php echo $d['done'] ? 'bg-green-400' : 'bg-secondary/20'; ?>">
+                                    </div>
                                     <div class="flex-1">
-                                        <p class="text-xs font-medium text-primary <?php echo $d['done'] ? 'line-through opacity-50' : ''; ?>">
+                                        <p
+                                            class="text-xs font-medium text-primary <?php echo $d['done'] ? 'line-through opacity-50' : ''; ?>">
                                             <?php echo $d['label']; ?>
                                         </p>
                                         <p class="text-[10px] text-secondary"><?php echo $d['date']; ?></p>
                                     </div>
-                                    <?php if ($d['done']) : ?>
+                                    <?php if ($d['done']): ?>
                                         <i class="bi bi-check-circle-fill text-green-400 text-xs"></i>
                                     <?php endif; ?>
                                 </div>
@@ -469,16 +598,17 @@ $important_dates = [
                         <div class="p-3 space-y-1">
                             <?php
                             $links = [
-                                ['Edit Registration',  get_permalink(get_page_by_path('account')), 'bi-pencil'],
-                                ['Competition Rules',  home_url('/rule/guidelines-and-rules'),'bi-book'],
-                                ['Judging Criteria',   home_url('/rule/judging-criteria'),'bi-star'],
-                                ['Contact Organizer',  'mailto:info@ssdc2026.com', 'bi-envelope'],
+                                ['Edit Registration', get_permalink(get_page_by_path('account')), 'bi-pencil'],
+                                ['Competition Rules', home_url('/rule/guidelines-and-rules'), 'bi-book'],
+                                ['Judging Criteria', home_url('/rule/judging-criteria'), 'bi-star'],
+                                ['Contact Organizer', 'mailto:info@ssdc2026.com', 'bi-envelope'],
                             ];
-                            foreach ($links as [$label, $href, $icon]) :
-                            ?>
+                            foreach ($links as [$label, $href, $icon]):
+                                ?>
                                 <a href="<?php echo esc_url($href); ?>"
                                     class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-light transition group">
-                                    <span class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition">
+                                    <span
+                                        class="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition">
                                         <i class="bi <?php echo $icon; ?> text-primary text-xs"></i>
                                     </span>
                                     <span class="text-sm text-primary"><?php echo $label; ?></span>

@@ -239,8 +239,8 @@ require get_template_directory() . '/inc/participants-post-type.php';
 require get_template_directory() . '/inc/ssdc-ajax-handler.php';
 
 
-
-
+// inc//ajax-handler.php
+require get_template_directory() . '/inc/ssdc-admin-post.php';
 
 /* ===============================
 *** ==========TANBAHAN ==========***
@@ -420,3 +420,34 @@ function my_custom_registration_redirect() {
     return home_url('/');
 }
 add_filter('registration_redirect', 'my_custom_registration_redirect');
+
+
+/**
+ * Ambil data submission milik user
+ * untuk keburuhan upload dari dashboard
+ */
+function ssdc_get_participant_submission($user_id) {
+    $existing = get_posts([
+        'post_type'   => 'participants',
+        'author'      => $user_id,
+        'numberposts' => 1,
+        'post_status' => ['publish', 'pending', 'draft'],
+    ]);
+
+    $post_id = $existing ? $existing[0]->ID : null;
+    $is_edit = !is_null($post_id);
+    $status  = $is_edit ? get_post_status($post_id) : null;
+
+    $sub_link = $is_edit ? get_post_meta($post_id, 'submission_link', true) : '';
+    $sub_file = $is_edit ? get_post_meta($post_id, 'submission_file', true) : '';
+
+    return [
+        'post_id'   => $post_id,
+        'is_edit'   => $is_edit,
+        'status'    => $status,
+        'is_locked' => ($status === 'publish'),
+        'sub_link'  => $sub_link,
+        'sub_file'  => $sub_file,
+        'has_sub'   => !empty($sub_link) || !empty($sub_file),
+    ];
+}
