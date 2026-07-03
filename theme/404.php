@@ -10,22 +10,30 @@
 get_header();
 ?>
 
-	<section id="primary">
-		<main id="main">
+<section id="primary">
+	<main id="main">
 
-			<div>
-				<header class="page-header">
-					<h1 class="page-title"><?php esc_html_e( 'Page Not Found', 'ssdc' ); ?></h1>
-				</header><!-- .page-header -->
+		<div class="flex flex-col justify-center items-center min-h-screen bg-primary text-white">
+			<div class="container">
+				<div class="max-w-xl mx-auto text-center">
+					<header class="page-header">
+						<h1 class="page-title">
+							<?php esc_html_e('Page Not Found', 'ssdc'); ?>
+						</h1>
+					</header><!-- .page-header -->
 
-				<div <?php ssdc_content_class( 'page-content' ); ?>>
-					<p><?php esc_html_e( 'This page could not be found. It might have been removed or renamed, or it may never have existed.', 'ssdc' ); ?></p>
-					<?php get_search_form(); ?>
-				</div><!-- .page-content -->
+					<div class="text-center" <?php ssdc_content_class('page-content'); ?>>
+						<p>
+							<?php esc_html_e('This page could not be found. It might have been removed or renamed, or it may never have existed.', 'ssdc'); ?>
+						</p>
+					</div><!-- .page-content -->
+				</div>
 			</div>
 
-		</main><!-- #main -->
-	</section><!-- #primary -->
+		</div>
+
+	</main><!-- #main -->
+</section><!-- #primary -->
 
 <?php
 get_footer();
