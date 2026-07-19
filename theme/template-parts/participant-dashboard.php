@@ -309,8 +309,8 @@ $important_dates = [
                     $sub_file = get_post_meta($post_id, 'submission_file_url', true);
                     $has_sub = $sub_link || $sub_file;
                     ?>
-                    <!-- hidden submisiion -->
-                    <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden hidden"> 
+                  
+                    <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden "> 
 
                         <!-- Header -->
                         <div class="px-6 py-4 border-b border-secondary/5 flex items-center justify-between">
@@ -359,7 +359,8 @@ $important_dates = [
     <?php elseif (isset($_GET['sub_error'])) :
         $error_messages = [
             'locked'        => 'Submission sudah disetujui dan tidak bisa diubah.',
-            'empty'         => 'Silakan isi link eksternal atau upload file.',
+           // 'empty'         => 'Silakan isi link eksternal atau upload file.',
+             'empty'         => 'Upload file sudah di tutup.',
             'invalid_url'   => 'Format link tidak valid.',
             'invalid_type'  => 'Tipe file tidak diizinkan.',
             'upload_failed' => 'Gagal mengupload file.',
@@ -392,7 +393,8 @@ $important_dates = [
         </div>
     <?php endif; ?>
 
-    <?php if (!$has_sub) : ?>
+    <!-- Hidden submission -->
+   <!--  <?php if (!$has_sub) : ?>
         <div class="text-center py-4">
             <p class="text-sm text-secondary/50 mb-3">No submissions have been uploaded yet.</p>
             <button type="button" onclick="document.getElementById('ssdc-upload-modal').classList.remove('hidden')"
@@ -407,7 +409,7 @@ $important_dates = [
                 <i class="bi bi-pencil"></i> Update Submission
             </button>
         </div>
-    <?php endif; ?>
+    <?php endif; ?> -->
 
 </div>
 
