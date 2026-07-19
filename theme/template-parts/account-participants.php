@@ -547,7 +547,8 @@ $steps = ['Institution', 'Head of Team', 'Members', 'Lecturer', 'Submission'];
                 <div x-show="currentStep === 4" x-transition.opacity
                     x-data="{ fileName: '<?php echo esc_js($saved_file_name); ?>' }">
 
-                    <div class="bg-white rounded-2xl shadow-sm p-6 mb-4 border border-secondary/10">
+                   <!--  hiden submission -->
+                    <div class="bg-white rounded-2xl shadow-sm p-6 mb-4 border border-secondary/10 hidden">
                         <div class="flex items-center gap-3 mb-5">
                             <span class="w-7 h-7 rounded-full bg-accent text-white text-xs flex items-center justify-center">
                                 <i class="bi bi-upload"></i>

@@ -309,7 +309,8 @@ $important_dates = [
                     $sub_file = get_post_meta($post_id, 'submission_file_url', true);
                     $has_sub = $sub_link || $sub_file;
                     ?>
-                    <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden">
+                    <!-- hidden submisiion -->
+                    <div class="bg-white rounded-2xl border border-secondary/10 shadow-sm overflow-hidden hidden"> 
 
                         <!-- Header -->
                         <div class="px-6 py-4 border-b border-secondary/5 flex items-center justify-between">
