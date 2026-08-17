@@ -18,7 +18,7 @@ $video_thumbnail = get_field('video_thumbnail');
     <!-- TEST TAMBAHAN -->
     <section class="py-16 bg-primary" x-data="{ modalOpen: false, embedUrl: '', fileUrl: '', isExternal: false }">
 
-        <div class="splide" id="video-slider" aria-label="Video Gallery">
+        <div class="splide max-w-[680px] mx-auto" id="video-slider" aria-label="Video Gallery">
             <div class="splide__track">
                 <ul class="splide__list">
                     <?php if ($videos):
@@ -28,7 +28,7 @@ $video_thumbnail = get_field('video_thumbnail');
                             $video = $video_item['video'];
                             $video_thumbnail = $video_item['video_thumbnail'];
                             ?>
-                            <li class="splide__slide">
+                            <li class="splide__slide ">
                                 <button class="relative flex justify-center items-center focus:outline-none group w-full"
                                     @click="isExternal = <?php echo $use_video_url ? 'true' : 'false'; ?>; embedUrl = '<?php echo $use_video_url ? get_embed_url($video_url) : ''; ?>'; fileUrl = '<?php echo !$use_video_url ? esc_url($video['url']) : ''; ?>'; modalOpen = true"
                                     aria-label="Watch the video">

@@ -81,15 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // tambahan splide
     const videoSlider = new Splide('#video-slider', {
-        type: 'loop',
+        type: 'slide',
         perPage: 1,
         perMove: 1,
         interval: 3000,
         focus: 'center',
         gap: '1.5rem',
         pauseOnHover: false,
-        pagination: true,
-        arrows: true,
+        pagination: false,
+        arrows: false,
         autoplay: false,
         breakpoints: {
             768: { perPage: 1 },

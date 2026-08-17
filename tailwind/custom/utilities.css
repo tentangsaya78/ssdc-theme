@@ -123,7 +123,10 @@ li img{
 /* ==========================================================================
    4.   splide slideshow
    ========================================================================== */
-/* stayling untuk splide slideshow */
+/* stayling untuk splide slideshow 
+ tambahan 17 agustus pada splide track  <div class="splide max-w-[680px] mx-auto" id="video-slider" aria-label="Video Gallery">
+*/
+
 
 .splide__pagination{
     @apply !-bottom-10;
