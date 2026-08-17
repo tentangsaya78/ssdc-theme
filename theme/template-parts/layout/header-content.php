@@ -22,7 +22,7 @@ $menu = [
 ];
 ?>
 <div x-data="{ openContact: false }">
-<header id="masthead">
+<header id="masthead" class="">
 
     <!-- ===== HAMBURGER MENU (kiri) ===== -->
     <div x-data="{ menuOpen: false, scrolled: false }" @scroll.window="scrolled = window.scrollY > 100">

@@ -82,9 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // tambahan splide
     const videoSlider = new Splide('#video-slider', {
         type: 'loop',
-        perPage: 2,
+        perPage: 1,
         perMove: 1,
-        autoplay: true,
         interval: 3000,
         focus: 'center',
         gap: '1.5rem',
