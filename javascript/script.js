@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplay: false,
         breakpoints: {
             768: { perPage: 1 },
-            1024: { perPage: 2 },
+            1024: { perPage: 1 },
         },
     });
 

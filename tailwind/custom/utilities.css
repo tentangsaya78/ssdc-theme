@@ -124,6 +124,8 @@ li img{
    4.   splide slideshow
    ========================================================================== */
 /* stayling untuk splide slideshow */
+
 .splide__pagination{
     @apply !-bottom-10;
 }
+
